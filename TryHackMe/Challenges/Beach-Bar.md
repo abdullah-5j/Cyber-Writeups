@@ -26,7 +26,7 @@ Only two ports open: SSH on 22 and a Gunicorn web app on 80 that redirects to `/
 Pulled the raw source of the login page and looked for anything left behind in the HTML.
 
 ```bash
-curl -s http://10.112.150.245/login "
+curl -s http://10.112.150.245/login 
 ```
 
 ![leaked credentials](../Screenshots/beach-bar/leaked_creds.png)
