@@ -195,7 +195,7 @@ cat /root/root.txt
 
 ![root flag](../Screenshots/umbrella/root_flag.png)
 
-**Root flag captured.** Box complete.
+**Root flag captured.** 
 
 ---
 
