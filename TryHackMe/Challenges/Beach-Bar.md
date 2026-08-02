@@ -132,29 +132,3 @@ su root
 The stream password was reused as root's login password — `su root` dropped straight into a root shell, and the flag was in `/root/root.txt`.
 
 ---
-
-## Attack Chain
-
-1. **Recon** → Gunicorn/Flask on 80, SSH on 22.
-2. **Info leak** → `dj:dj` hardcoded in a login-page HTML comment.
-3. **Vulnerability** → Import feature parses YAML with `yaml.load(Loader=yaml.Loader)`.
-4. **RCE** → `!!python/object/apply:os.system` payload → reverse shell as `bartender`.
-5. **User flag** → `/home/bartender/user.txt`.
-6. **Privesc lead** → root daemon leaking `--stream-pass` via `ps`.
-7. **Root** → that password reused as root's login password → `su root`.
-8. **Root flag** → `/root/root.txt`.
-
----
-
-## Key Takeaways
-
-- **`yaml.load()` vs `yaml.safe_load()` matters.** Any YAML parsed from user input with the full `Loader` allows arbitrary Python object instantiation and code execution.
-- **CLI arguments are not secrets.** Anything passed as `--flag value` is visible to every local user through `ps` and `/proc/<pid>/cmdline`, regardless of file permissions. Use environment variables or a secret manager.
-- **Password reuse is still one of the most common privesc paths** — a throwaway service password often protects something far more important.
-- **Read the room briefing.** Every clue in the flavor text mapped to a real finding on the box.
-
----
-
-## Tools Used
-
-`nmap` · `curl` · `netcat` · standard Linux enumeration (`ps`, `find`, `getcap`)
