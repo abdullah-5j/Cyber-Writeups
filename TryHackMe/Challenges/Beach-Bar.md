@@ -31,7 +31,7 @@ curl -s http://10.112.150.245/login
 
 ![leaked credentials](../Screenshots/beach-bar/leaked_creds.png)
 
-Demo credentials `dj / dj` were sitting in an HTML comment above the form ("swap this before the season starts, ticket BAR-7") — that's the DJ who never logs out.
+Demo credentials `dj / dj` were sitting in an HTML comment above the form — that's the DJ who never logs out.
 
 ---
 
