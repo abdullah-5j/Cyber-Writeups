@@ -1,6 +1,7 @@
 # TryHackMe – Umbrella
 
 **Category:** Boot2Root · **Difficulty:** Medium
+
 **Tags:** `docker-registry` `credential-reuse` `nodejs` `eval-rce` `container-escape` `bind-mount`
 
 Umbrella Corp has been developing a time-tracking application. This one isn't a single bug — it's a chain: an exposed Docker registry leaks the app image, the image leaks the DB password, the database hands over crackable user hashes, the app itself runs `eval()` on user input, and a root container with a host bind-mount turns a foothold into full root.
