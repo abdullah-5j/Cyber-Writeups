@@ -1,6 +1,6 @@
 # TryHackMe – Hacker Holidays: The Byte Lotus Hotel (Beach Bar)
 
-**Category:** Boot2Root · **Difficulty:** Easy · **Points:** 60
+**Category:** Boot2Root ·
 **Tags:** `flask` `pyyaml-deserialization` `rce` `credential-reuse` `linux`
 
 The beach bar's jukebox takes song requests from anyone with a phone. The briefing hints at three things — a DJ who never logs out, a queue that accepts more than song titles, and a service quietly announcing "something" — and each one turns out to be a real finding on the box.
@@ -12,7 +12,7 @@ The beach bar's jukebox takes song requests from anyone with a phone. The briefi
 Full port + service scan on the target.
 
 ```bash
-nmap -sC -sV -p- -T4 -oN nmap_full.txt 10.112.150.245
+nmap -sC -sV -p- -T4 10.112.150.245
 ```
 
 ![nmap scan](../Screenshots/beach-bar/nmap_scan.png)
@@ -26,7 +26,7 @@ Only two ports open: SSH on 22 and a Gunicorn web app on 80 that redirects to `/
 Pulled the raw source of the login page and looked for anything left behind in the HTML.
 
 ```bash
-curl -s http://10.112.150.245/login | grep -A6 "staff note"
+curl -s http://10.112.150.245/login "
 ```
 
 ![leaked credentials](../Screenshots/beach-bar/leaked_creds.png)
