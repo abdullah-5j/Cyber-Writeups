@@ -1,6 +1,6 @@
 # TryHackMe – Hacker Holidays: The Byte Lotus Hotel (Beach Bar)
 
-**Category:** Boot2Root · **Difficulty:** Easy · **Points:** 60
+**Category:** Boot2Root ·
 **Tags:** `flask` `pyyaml-deserialization` `rce` `credential-reuse` `linux`
 
 The beach bar's jukebox takes song requests from anyone with a phone. The briefing hints at three things — a DJ who never logs out, a queue that accepts more than song titles, and a service quietly announcing "something" — and each one turns out to be a real finding on the box.
@@ -12,7 +12,7 @@ The beach bar's jukebox takes song requests from anyone with a phone. The briefi
 Full port + service scan on the target.
 
 ```bash
-nmap -sC -sV -p- -T4 -oN nmap_full.txt 10.112.150.245
+nmap -sC -sV -p- -T4 10.112.150.245
 ```
 
 ![nmap scan](../Screenshots/beach-bar/nmap_scan.png)
@@ -26,12 +26,12 @@ Only two ports open: SSH on 22 and a Gunicorn web app on 80 that redirects to `/
 Pulled the raw source of the login page and looked for anything left behind in the HTML.
 
 ```bash
-curl -s http://10.112.150.245/login | grep -A6 "staff note"
+curl -s http://10.112.150.245/login 
 ```
 
 ![leaked credentials](../Screenshots/beach-bar/leaked_creds.png)
 
-Demo credentials `dj / dj` were sitting in an HTML comment above the form ("swap this before the season starts, ticket BAR-7") — that's the DJ who never logs out.
+Demo credentials `dj / dj` were sitting in an HTML comment above the form — that's the DJ who never logs out.
 
 ---
 
@@ -132,29 +132,3 @@ su root
 The stream password was reused as root's login password — `su root` dropped straight into a root shell, and the flag was in `/root/root.txt`.
 
 ---
-
-## Attack Chain
-
-1. **Recon** → Gunicorn/Flask on 80, SSH on 22.
-2. **Info leak** → `dj:dj` hardcoded in a login-page HTML comment.
-3. **Vulnerability** → Import feature parses YAML with `yaml.load(Loader=yaml.Loader)`.
-4. **RCE** → `!!python/object/apply:os.system` payload → reverse shell as `bartender`.
-5. **User flag** → `/home/bartender/user.txt`.
-6. **Privesc lead** → root daemon leaking `--stream-pass` via `ps`.
-7. **Root** → that password reused as root's login password → `su root`.
-8. **Root flag** → `/root/root.txt`.
-
----
-
-## Key Takeaways
-
-- **`yaml.load()` vs `yaml.safe_load()` matters.** Any YAML parsed from user input with the full `Loader` allows arbitrary Python object instantiation and code execution.
-- **CLI arguments are not secrets.** Anything passed as `--flag value` is visible to every local user through `ps` and `/proc/<pid>/cmdline`, regardless of file permissions. Use environment variables or a secret manager.
-- **Password reuse is still one of the most common privesc paths** — a throwaway service password often protects something far more important.
-- **Read the room briefing.** Every clue in the flavor text mapped to a real finding on the box.
-
----
-
-## Tools Used
-
-`nmap` · `curl` · `netcat` · standard Linux enumeration (`ps`, `find`, `getcap`)
