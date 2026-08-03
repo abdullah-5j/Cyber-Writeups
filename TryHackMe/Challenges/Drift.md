@@ -1,6 +1,7 @@
 # Drift
 
-> Byte Lotus Hotel · "Do Not Disturb" series · Boot2Root · 
+> Byte Lotus Hotel · "Do Not Disturb" series · Boot2Root ·
+> 
 > Node.js/Express · NoSQL auth bypass · EJS SSTI · Node `--inspect` abuse · `disk` group → root
 
 The briefing reads like a beach-noir short story: a wallet that signs a transaction it never should have, a shell on the beach that answers back, a stranger who sits down in a still-warm session, and a set of footprints to follow up the same climb someone already made. That maps almost one-to-one onto the kill chain — auth bypass, SSTI RCE, attaching to a live debugger, and retracing a prior operator's privesc.
