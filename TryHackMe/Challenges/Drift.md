@@ -113,7 +113,7 @@ cat /home/poolside/user.txt
 ![user flag](../Screenshots/drift/user-flag.png)
 
 ```
-THM{w4rm_s3ss10n_h1j4ck3d}
+THM{w4rm_s3s******************}
 ```
 
 ## Privesc enumeration
@@ -189,7 +189,7 @@ cat /tmp/rf.txt
 ![root flag off raw disk](../Screenshots/drift/root-flag.png)
 
 ```
-THM{r4w_d1sk_4cc3ss_w4s_t00_much}
+THM{r4w_d1sk_4c*******************}
 ```
 
 ## Chain summary
