@@ -192,11 +192,3 @@ cat /tmp/rf.txt
 THM{r4w_d1sk_4c*******************}
 ```
 
-## Chain summary
-
-- NoSQL operator injection (`password[$ne]`) → staff session as `attendant` — *the wallet signs the unauthorized transaction*
-- EJS SSTI on `/staff/preview` → Node reverse shell as `poolside` — *the shell on the beach answers back*
-- Exposed Node `--inspect` on the `lotus-telemetry` service → attach as `pipelinesvc` — *a stranger sits down in a warm session*
-- `pipelinesvc` in `disk` group → `debugfs` reads `root.txt` off `/dev/nvme0n1p1` — *follow his footprints, climb the way he climbed*
-
-Two takeaways worth writing down: with a NoSQL backend, "sanitise the string" has to become "reject objects in your query params," or an operator walks right through your login. And a debug inspector on localhost is still an inspector — `--inspect` has no business on a running service, and `disk` group is just root spelled differently.
