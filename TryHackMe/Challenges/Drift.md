@@ -122,10 +122,9 @@ The briefing said to follow the previous climber's footprints, and someone did l
 
 ```bash
 cat /home/poolside/.viminfo
-# → file marks / jumplist entries pointing at /tmp/solve.js
 ```
 
-The `.viminfo` still points at `/tmp/solve.js`, but the file itself is gone (cleared on reboot) — the leftover reference is the footprint: someone edited an exploit script here and climbed this exact route before me.
+The `.viminfo` points at `/tmp/solve.js`, but the file itself is gone (cleared on reboot) — the leftover reference is the footprint: someone edited an exploit script here and climbed this exact route before me.
 
 The actual lever is a service. Digging through `/opt` turns up a telemetry app owned by a different user.
 
