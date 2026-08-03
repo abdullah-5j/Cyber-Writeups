@@ -1,6 +1,7 @@
 # TryHackMe – Umbrella
 
 **Category:** Boot2Root · **Difficulty:** Medium
+
 **Tags:** `docker-registry` `credential-reuse` `nodejs` `eval-rce` `container-escape` `bind-mount`
 
 Umbrella Corp has been developing a time-tracking application. This one isn't a single bug — it's a chain: an exposed Docker registry leaks the app image, the image leaks the DB password, the database hands over crackable user hashes, the app itself runs `eval()` on user input, and a root container with a host bind-mount turns a foothold into full root.
@@ -194,32 +195,10 @@ cat /root/root.txt
 
 ![root flag](../Screenshots/umbrella/root_flag.png)
 
-**Root flag captured.** Box complete.
+**Root flag captured.** 
 
 ---
 
-## Attack Chain
-
-1. **Recon** → SSH, MySQL, Docker Registry, Node/Express app.
-2. **Exposed registry** → pulled `umbrella/timetracking` image config.
-3. **DB password** → leaked in the image `ENV` (`DB_PASS`).
-4. **DB access** → dumped `users` table (4 MD5 hashes).
-5. **Cracked hashes** → four plaintext passwords.
-6. **eval() RCE** → `/time` endpoint runs `eval()` on user input → root shell in the app container.
-7. **Credential reuse** → `claire-r:Password1` for host SSH → user flag.
-8. **Container escape** → root container + host bind-mount → planted SUID bash → root on host.
-
----
-
-## Key Takeaways
-
-- **Exposed Docker registries leak the whole application stack** — source, config, and secrets. Never expose the registry API unauthenticated.
-- **Don't bake secrets into image `ENV`.** They're trivially recoverable from the image config, no running container required.
-- **`eval()` on user input is remote code execution.** Use a real math parser, never `eval`.
-- **Credential reuse across services** turns one cracked password into lateral movement.
-- **A container running as root with a host bind-mount is not a boundary.** Root inside the container plus a writable host mount equals root on the host.
-
----
 
 ## Answers
 
