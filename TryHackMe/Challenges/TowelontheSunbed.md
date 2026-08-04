@@ -1,4 +1,4 @@
-# The Byte Lotus Hotel — Towel on the Sunbed (Ponzi)
+# Towel on the Sunbed (Ponzi)
 
 **Category:** Web · Race Condition
 
@@ -22,7 +22,7 @@ Pulled the login page and the client JS to map out how it talks.
 
 No screenshot for this one, but it handed me the whole API:
 
-    GET  /dashboard/api/me   -> balance, tier, canClaim, secondsUntilClaim
+    GET  /dashboard/api/me   
     POST /claim              -> +50 PONZI, once per 24h
     GET  /vault              -> the flag, if balance >= 150
     const WHALE_THRESHOLD = 150
