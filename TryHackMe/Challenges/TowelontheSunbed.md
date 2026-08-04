@@ -47,6 +47,7 @@ This is the wall. A normal second claim right now just gets "Reward already clai
 
 ## The race
 
+Register a fresh account.
 The /claim endpoint reads your last-claim time, checks 24h has passed, then writes the new balance and timestamp. That read-check-write isn't atomic, so if a load of requests land in the same instant they all read "never claimed" before any of them commits. I grabbed a fresh account's session cookie from DevTools (Application → Cookies → connect.sid) to feed the script.
 
 ![session cookie](../Screenshots/byte-lotus-ponzi/session-cookie.png)
