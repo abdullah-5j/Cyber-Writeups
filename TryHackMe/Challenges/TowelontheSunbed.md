@@ -69,9 +69,9 @@ Hit Open Vault and the vault handed over the flag.
 
 ![flag](../Screenshots/byte-lotus-ponzi/flag.png)
 
-    THM{t0w3l_0n_th3_sunb3d_d0ubl3_sp3nt}
+    THM{t0w3l_0n_th3_******_******_*****}
 
-The flag literally names the bug — double spent. The towel was claimed three times over while nobody was looking.
+
 
 ## Exploit
 
