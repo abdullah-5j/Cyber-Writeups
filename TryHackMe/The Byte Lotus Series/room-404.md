@@ -58,10 +58,11 @@ git-dumper http://10.114.128.65:8080/.git/ ./byte-lotus-git
 
 ![git dumper](../Screenshots/room-404/git-dumper-clone.png)
 
-Pulled everything down and checked out the working tree fine. Only one commit in the whole repo actually — checked the reflog and it's a single "initial Byte Lotus guest platform" commit from a `night-shift` dev, so no digging through history needed, just look at what's in the tree.
+Pulled everything down and checked out the working tree fine. Only one commit in the whole repo actually checked the reflog and it's a single "initial Byte Lotus guest platform" commit from a `night-shift` dev, so no digging through history needed, just look at what's in the tree.
 
 ```
-cd byte-lotus-git && ls -la
+cd byte-lotus-git
+ls -la
 ```
 
 Three files: `app.js`, `index.html`, `README.md`. Read the README since that's usually where people leave notes to themselves.
