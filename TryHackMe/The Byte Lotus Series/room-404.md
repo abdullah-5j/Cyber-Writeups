@@ -14,7 +14,7 @@ curl -i http://10.114.128.65:8080/
 
 Response headers say `Server: Werkzeug/3.0.1 Python/3.12.3` which means this is a Flask app being served straight off the dev server, not behind anything real. Footer on the page also says "guest experience platform · build staging" so yeah, this is clearly not meant to be public-facing in this state.
 
-![homepage](../Screenshots/byte-lotus/site-homepage.png)
+![homepage](../Screenshots/byte-lotus-hollow-shell/site-homepage.png)
 
 Just a hotel landing page otherwise, nothing on it directly.
 
@@ -26,7 +26,7 @@ Ran gobuster against it to see if there's anything not linked from the nav.
 gobuster dir -u http://10.114.128.65:8080 -w /usr/share/wordlists/dirb/common.txt -x html,txt,py,json,js -t 50
 ```
 
-![gobuster hit](../Screenshots/byte-lotus/gobuster-dirsearch-git-hit.png)
+![gobuster hit](../Screenshots/byte-lotus-hollow-shell/gobuster-dirsearch-git-hit.png)
 
 Bunch of timeouts in the wordlist that don't matter, but `.git/HEAD` came back 200. That's the actual git folder sitting exposed on the live server, not just a reference to it somewhere. Checked it:
 
@@ -54,7 +54,7 @@ pipx install git-dumper
 git-dumper http://10.114.128.65:8080/.git/ ./byte-lotus-git
 ```
 
-![git dumper](../Screenshots/byte-lotus/git-dumper-clone.png)
+![git dumper](../Screenshots/byte-lotus-hollow-shell/git-dumper-clone.png)
 
 Pulled everything down and checked out the working tree fine. Only one commit in the whole repo actually — checked the reflog and it's a single "initial Byte Lotus guest platform" commit from a `night-shift` dev, so no digging through history needed, just look at what's in the tree.
 
@@ -68,7 +68,7 @@ Three files: `app.js`, `index.html`, `README.md`. Read the README since that's u
 cat README.md
 ```
 
-![readme flag](../Screenshots/readme-flag.png)
+![readme flag](../Screenshots/byte-lotus-hollow-shell/readme-flag.png)
 
 And there it is, sitting right in the README under a comment that says "remove before launch" — which obviously didn't happen.
 
