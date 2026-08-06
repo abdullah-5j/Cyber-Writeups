@@ -73,8 +73,7 @@ cat README.md
 
 ![readme flag](../Screenshots/room-404/readme-flag.png)
 
-And there it is, sitting right in the README under a comment that says "remove before launch" — which obviously didn't happen.
+And there it is, sitting right in the README under a comment that says "remove before launch".
 
-**Flag:** `THM{byt3_l0tus_n3v3r_f0rg3ts}`
+**Flag:** `THM{byt3_l0tus_*****_*******}`
 
-Classic exposed `.git` folder leak, dev committed a staging note with the flag baked in and never scrubbed it before pushing this to something reachable. Room lived up to its briefing, the "room not on the floor plan" was literally just the `.git` directory the whole time.
