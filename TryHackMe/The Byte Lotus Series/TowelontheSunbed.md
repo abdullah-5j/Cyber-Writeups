@@ -1,4 +1,4 @@
-# The Byte Lotus Hotel — Towel on the Sunbed (Ponzi)
+# Towel on the Sunbed (Ponzi)
 
 **Category:** Web · Business Logic / Race Condition
 **Difficulty:** Medium
