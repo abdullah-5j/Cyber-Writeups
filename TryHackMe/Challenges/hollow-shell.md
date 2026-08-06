@@ -3,7 +3,7 @@
 **Category:** Web
 
 
-Byte Lotus has a "Shoreline Display" portal where staff upload a `.zip` "shell" (basically a themed asset pack — a manifest plus some images/css) to set the ambiance on the in-room tablets. The whole thing turns out to be a classic Zip Slip: the app trusts whatever path is inside the zip when it extracts it, so a filename like `../../hooks/callback.py` walks straight out of the shell's own folder and into the app root. Combine that with the app's own "automation hooks" feature — a background worker that picks up and runs anything dropped in `hooks/` — and you've got remote code execution from a file upload.
+Byte Lotus has a "Shoreline Display" portal where staff upload a `.zip` "shell" to set the ambiance on the in-room tablets. The whole thing turns out to be a classic Zip Slip: the app trusts whatever path is inside the zip when it extracts it, so a filename like `../../hooks/callback.py` walks straight out of the shell's own folder and into the app root. Combine that with the app's own "automation hooks" feature — a background worker that picks up and runs anything dropped in `hooks/` — and you've got remote code execution from a file upload.
 
 ## Recon
 
@@ -51,7 +51,7 @@ That's the traversal confirmed a file that should've been stuck inside a shell's
 
 ## From file write to a shell
 
-The dashboard mentions the shell format can include "automation hooks" that a theme worker applies shortly after upload — a separate background process that clearly executes something out of a `hooks/` folder. Same zip slip technique, just pointed at `../../hooks/` instead of `../../static/`, with a Python reverse shell payload as the file content. Grabbed the actual payload from the reverse shell cheatsheet here: https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-reverse-cheatsheet/
+The dashboard mentions the shell format can include "automation hooks" that a theme worker applies shortly after upload a separate background process that clearly executes something out of a `hooks/` folder. Same zip slip technique, just pointed at `../../hooks/` instead of `../../static/`, with a Python reverse shell payload as the file content. Grabbed the actual payload from the reverse shell cheatsheet here: https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-reverse-cheatsheet/
 
 ![reverse shell payload reference](../Screenshots/byte-lotus-hollow-shell/reverse-shell-payload-source.png)
 
@@ -73,4 +73,4 @@ Landed as roomservice, straight into the app's own working directory — you can
 
 ![flag](../Screenshots/byte-lotus-hollow-shell/flag.png)
 
-    THM{z1p_sl1pp3d_1nt0_a_sh3ll}
+    THM{z1p_sl1p******************}
