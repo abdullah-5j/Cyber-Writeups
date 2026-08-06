@@ -1,4 +1,4 @@
-# The Byte Lotus Hotel — The Hollow Shell
+# The Hollow Shell
 
 **Category:** Web
 **Difficulty:** Medium
