@@ -1,6 +1,8 @@
 # Hacker Holidays — The Byte Lotus Hotel
 
-TryHackMe, Web category, Very Easy. Briefing was pretty on the nose about it too — something about a room "not on the floor plan" on port 8080, and a night-shift dev who shipped more than the website. Objective was just to dump the exposed source and grab the flag.
+**Category:** Web
+
+Briefing was pretty on the nose about it too — something about a room "not on the floor plan" on port 8080, and a night-shift dev who shipped more than the website. Objective was just to dump the exposed source and grab the flag.
 
 Target: `10.114.128.65:8080`
 
