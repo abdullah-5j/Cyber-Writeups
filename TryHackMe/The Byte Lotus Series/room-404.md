@@ -68,7 +68,7 @@ Three files: `app.js`, `index.html`, `README.md`. Read the README since that's u
 cat README.md
 ```
 
-![readme flag](../Screenshots/byte-lotus/readme-flag.png)
+![readme flag](../Screenshots/readme-flag.png)
 
 And there it is, sitting right in the README under a comment that says "remove before launch" — which obviously didn't happen.
 
