@@ -41,13 +41,13 @@ Plain multipart POST to /upload, cookie-based session, nothing unusual. Forwarde
 
 This app's exact bug is written up well here: https://security.snyk.io/research/zip-slip-vulnerability — the short version is that if the extraction code trusts the filenames stored inside a zip, a name like `../../static/proof.css` walks the extraction straight back out of the folder it's supposed to be confined to. Nothing in this app's upload handler stops that.
 
-Proved it the safe way first — a zip whose only "malicious" part was a manifest plus a stylesheet named with a `../../static/` prefix. Uploaded it the same way as before and went straight to the URL it should land on if the traversal worked.
+Proved it the safe way first a zip whose only "malicious" part was a manifest plus a stylesheet named with a `../../static/` prefix. Uploaded it the same way as before and went straight to the URL it should land on if the traversal worked.
 
     http://10.112.156.102:5000/static/slip-proof.css
 
 ![zip slip confirmed](../Screenshots/byte-lotus-hollow-shell/zipslip-confirmed.png)
 
-That's the traversal confirmed — a file that should've been stuck inside a shell's own folder ended up sitting in the app's real static/ directory instead.
+That's the traversal confirmed a file that should've been stuck inside a shell's own folder ended up sitting in the app's real static/ directory instead.
 
 ## From file write to a shell
 
