@@ -11,7 +11,7 @@ The briefing reads like a beach-noir short story: a wallet that signs a transact
 Full TCP sweep with default scripts and version detection to start.
 
 ```bash
-nmap -sC -sV -p- -T4 -oN drift_full.txt 10.112.190.152
+nmap -sC -sV -p- -T4 10.112.190.152
 ```
 
 ![nmap](../Screenshots/drift/nmap.png)
