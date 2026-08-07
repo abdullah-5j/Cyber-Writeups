@@ -1,6 +1,6 @@
-# The Byte Lotus Hotel 2 — TryHackMe
+# Infinity Pool
 
-Boot2root, medium difficulty. Byte Lotus is back with a "surveillance-luxe hotel" theme and this time the vuln is sitting in a staff tool nobody bothered to lock down properly.
+Boot2Root
 
 ## Recon
 
