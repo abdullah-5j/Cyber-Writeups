@@ -86,7 +86,7 @@ N = 10
 barrier = threading.Barrier(N)
 
 def claim(i):
-    barrier.wait()  # all threads fire the same instant
+    barrier.wait() t
     try:
         r = requests.post(URL, cookies=COOKIE, timeout=10)
         return (i, r.status_code, r.text.strip())
