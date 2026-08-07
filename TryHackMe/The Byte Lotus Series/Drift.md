@@ -164,7 +164,7 @@ cat /tmp/pipe.txt
 # uid=995(pipelinesvc) gid=995(pipelinesvc) groups=995(pipelinesvc),6(disk)
 ```
 
-`pipelinesvc` — and crucially it's in group `disk` (gid 6).
+`pipelinesvc` and crucially it's in group `disk` (gid 6).
 
 ## disk group → root
 
