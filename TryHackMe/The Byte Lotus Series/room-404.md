@@ -1,4 +1,4 @@
-# Hacker Holidays — The Byte Lotus Hotel
+# Room 404
 
 **Category:** Web
 
