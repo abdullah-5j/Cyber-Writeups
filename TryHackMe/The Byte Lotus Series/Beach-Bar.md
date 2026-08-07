@@ -1,4 +1,4 @@
-# TryHackMe – Hacker Holidays: The Byte Lotus Hotel (Beach Bar)
+# The Byte Lotus Hotel (Beach Bar)
 
 **Category:** Boot2Root ·
 **Tags:** `flask` `pyyaml-deserialization` `rce` `credential-reuse` `linux`
