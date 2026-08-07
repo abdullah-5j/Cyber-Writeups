@@ -22,7 +22,7 @@ The landing page is a booking front-end with a Staff / Guest ID + passphrase log
 
 ![login page](../Screenshots/drift/login.png)
 
-"Byte Lotus never forgets · Stay Noticed™" — cute tagline, and a not-so-subtle hint that sessions are going to matter on this box.
+"Byte Lotus never forgets · Stay Noticed™
 
 Content discovery to find anything living behind the login.
 
