@@ -96,7 +96,7 @@ ls
 
 ![internal services discovered](../Screenshots/infinity-pool/08-internal-services-discovered.png)
 
-Two more apps sitting next to `edge`: `automation` and `watchtower`. Couldn't `cd` into either — permission denied on both. But `ps auxww` told a different story about who owns them:
+Two more apps sitting next to `edge`: `automation` and `watchtower`. Couldn't `cd` into either permission denied on both. But `ps auxww` told a different story about who owns them:
 
 - `watchtower` runs as `svc-wat+` on `127.0.0.1:3000`
 - `automation` runs as **root** on `127.0.0.1:9000`
@@ -121,12 +121,11 @@ That's a real leak FreePBX/UCP creds sitting in a config endpoint that never sho
 
 ```
 for path in /api/health /api/config /jobs /jobs/export /api/jobs /export /status /run /tasks; do
-  echo "== $path =="
   curl -sS -o /dev/null -w "%{http_code}\n" http://127.0.0.1:9000$path
 done
 ```
 
-Everything 404'd except `/jobs/export`, which came back `405 Method Not Allowed` — route exists, just needs a different verb. POST got further:
+Everything 404'd except `/jobs/export`, which came back `405 Method Not Allowed` route exists, just needs a different verb. POST got further:
 
 ```
 curl -sS -X POST http://127.0.0.1:9000/jobs/export
@@ -167,7 +166,7 @@ At this point the leaked UCP creds from watchtower's config were the only unused
 
 This part took way longer than it should have. The `/status` (UCP) login form has a CSRF-style token tied to the session, so the flow is: GET the login page, grab the token, POST it back with the creds, same session throughout.
 
-First few attempts kept landing back on the same login page — no error message, no dashboard, just silence. Tried a bunch of things to debug it:
+First few attempts kept landing back on the same login page. Tried a bunch of things to debug it:
 
 - Made sure I wasn't losing the session between the GET and the POST (single cookie jar, no resets)
 - Compared a deliberately wrong password against the "real" leaked creds — got byte-for-byte identical pages back both times, which told me the form wasn't even distinguishing valid from invalid logins the way I was hitting it
