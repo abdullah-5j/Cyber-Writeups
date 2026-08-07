@@ -60,7 +60,7 @@ Four of them came back "claimed successfully" on an account that's meant to allo
 
 ## Whale status
 
-Refreshed the dashboard and there it was — 200 / 150 PONZI, progress bar maxed, Open Vault lit up green. The claim timer still says 23:58, so the app thinks I only claimed once.
+Refreshed the dashboard and there it was 200 / 150 PONZI, progress bar maxed, Open Vault lit up green. The claim timer still says 23:58, so the app thinks I only claimed once.
 
 ![whale status](../Screenshots/byte-lotus-ponzi/whale-status.png)
 
