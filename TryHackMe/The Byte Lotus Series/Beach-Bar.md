@@ -106,7 +106,7 @@ User flag captured as `bartender`.
 
 ## Privilege Escalation
 
-`sudo -l`, SUID, cron and capabilities were all clean, so I looked at running processes instead — specifically anything owned by root.
+`sudo -l`, SUID, cron and capabilities were all clean, so I looked at running processes.
 
 ```bash
 ps auxww | grep -v "\[" | grep root
@@ -114,7 +114,7 @@ ps auxww | grep -v "\[" | grep root
 
 ![leaked stream password](../Screenshots/beach-bar/ps_streampass.png)
 
-A root-owned daemon `jukeboxd.py` is running with `--stream-pass SunsetSpritz2024!` right in its command line — the service quietly announcing "something". Command-line arguments are world-readable via `ps`, so any local user can read that secret.
+A root-owned daemon `jukeboxd.py` is running with `--stream-pass SunsetSpritz2024!` right in its command line.
 
 ---
 
