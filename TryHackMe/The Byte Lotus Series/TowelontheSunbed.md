@@ -56,7 +56,7 @@ Then fired 10 claims at once, all released together with a barrier so they hit a
 
 ![race output](../Screenshots/byte-lotus-ponzi/race-claims.png)
 
-Four of them came back "claimed successfully" on an account that's meant to allow one per day. You can even see the race in the newBalance values bouncing around — 50, 200, 200 — the writes stepping on each other. Balance landed at 200, tier flipped to Whale.
+Four of them came back "claimed successfully" on an account that's meant to allow one per day. You can even see the race in the newBalance values bouncing around 50, 200, 200 — the writes stepping on each other. Balance landed at 200, tier flipped to Whale.
 
 ## Whale status
 
@@ -70,9 +70,9 @@ Hit Open Vault and the vault handed over the flag.
 
 ![flag](../Screenshots/byte-lotus-ponzi/flag.png)
 
-    THM{t0w3l_0n_th3_sunb3d_d0ubl3_sp3nt}
+    THM{t0w3l_0n_th3_******_******_*****}
 
-The flag literally names the bug — double spent. The towel was claimed three times over while nobody was looking.
+
 
 ## Exploit
 
