@@ -88,7 +88,10 @@ Checked `.ssh` and `sudo -l`. No SUID weirdness either, just the standard system
 Started looking at what else was running on the box instead:
 
 ```
-cd /var/www/ && ls && cd infinity_pool && ls
+cd /var/www/ 
+ls
+cd infinity_pool 
+ls
 ```
 
 ![internal services discovered](../Screenshots/infinity-pool/08-internal-services-discovered.png)
