@@ -83,7 +83,7 @@ cat /home/web/user.txt
 
 ## Digging for privesc
 
-Checked `.ssh` (empty authorized_keys, dead end) and `sudo -l` (needed a password we didn't have — also dead end). No SUID weirdness either, just the standard system binaries.
+Checked `.ssh` and `sudo -l`. No SUID weirdness either, just the standard system binaries.
 
 Started looking at what else was running on the box instead:
 
