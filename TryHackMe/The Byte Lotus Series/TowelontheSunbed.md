@@ -13,7 +13,7 @@ Started with a full port scan to see what's actually running.
 
 ![nmap](../Screenshots/byte-lotus-ponzi/nmap-scan.png)
 
-Two ports — SSH on 22 and the app on 3000, running Node.js Express, title "Ponzi Portfolio — Login". SSH is a dead end with no creds, so everything happens on 3000.
+Two ports SSH on 22 and the app on 3000, running Node.js Express, title "Ponzi Portfolio — Login". SSH is a dead end with no creds, so everything happens on 3000.
 
 ## Poking the app
 
@@ -23,7 +23,7 @@ Pulled the login page and the client JS to map out how it talks.
 
 No screenshot for this one, but it handed me the whole API:
 
-    GET  /dashboard/api/me   -> balance, tier, canClaim, secondsUntilClaim
+    GET  /dashboard/api/me   
     POST /claim              -> +50 PONZI, once per 24h
     GET  /vault              -> the flag, if balance >= 150
     const WHALE_THRESHOLD = 150
