@@ -113,7 +113,7 @@ curl -sS http://127.0.0.1:3000/api/config
 {"automation_endpoint":"http://127.0.0.1:9000","note":"internal network only -- do not expose","ops_note":"UCP still on default template creds (FreePBXUCPTemplateCreator) -- ROTATE.","telephony_pass":"St4yN0t1c3d_2026","telephony_portal":"http://127.0.0.1:8080/ucp","telephony_user":"FreePBXUCPTemplateCreator"}
 ```
 
-That's a real leak — FreePBX/UCP creds sitting in a config endpoint that never should've been reachable, plus explicit confirmation that automation on 9000 is the thing to chase.
+That's a real leak FreePBX/UCP creds sitting in a config endpoint that never should've been reachable, plus explicit confirmation that automation on 9000 is the thing to chase.
 
 ## Finding the automation endpoint
 
