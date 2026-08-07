@@ -166,11 +166,7 @@ At this point the leaked UCP creds from watchtower's config were the only unused
 
 This part took way longer than it should have. The `/status` (UCP) login form has a CSRF-style token tied to the session, so the flow is: GET the login page, grab the token, POST it back with the creds, same session throughout.
 
-First few attempts kept landing back on the same login page. Tried a bunch of things to debug it:
-
-- Made sure I wasn't losing the session between the GET and the POST (single cookie jar, no resets)
-- Compared a deliberately wrong password against the "real" leaked creds — got byte-for-byte identical pages back both times, which told me the form wasn't even distinguishing valid from invalid logins the way I was hitting it
-- Went digging through the page's JS for anything client-side messing with the submit (hashing, extra hidden fields) before it POSTs
+First few attempts kept landing back on the same login page. Tried a bunch of things to debug it.
 
 Eventually got the session/token handling right and the leaked creds (`FreePBXUCPTemplateCreator` / `St4yN0t1c3d_2026`) went through.
 
