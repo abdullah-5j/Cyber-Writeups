@@ -189,15 +189,6 @@ curl -sS -X POST http://127.0.0.1:9000/jobs/export -H 'Authorization: Bearer cc_
 
 ![root flag](../Screenshots/ByteLotusHotel2/12-root-flag.png)
 
-`THM{tr4c3d_t0_th3_h0r1z0n}`
+`THM{tr4c3d_**_***_*******}`
 
-## Recap
 
-- Command injection in the public `/internal/netcheck` staff tool → shell as `web`
-- Found two internal-only services (`watchtower`, `automation`) via process listing, `automation` running as root
-- `watchtower`'s config endpoint leaked FreePBX/UCP creds and pointed straight at the automation service
-- Same command injection pattern again on `automation`'s `/jobs/export`, this time gated behind a bearer token
-- Token was sitting in a UCP voicemail, findable once logged in with the leaked creds
-- Root, via the same class of bug that got the initial foothold
-
-Two command injections dressed up differently — one obvious in a public form, one hidden behind auth and a token scavenger hunt. Good reminder that "internal only" doesn't mean "safe," it just means nobody expected you to get this far.
