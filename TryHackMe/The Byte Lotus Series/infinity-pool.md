@@ -12,7 +12,7 @@ nmap -sV -sC -p- --min-rate 1000 10.113.147.93
 
 ![nmap scan](../Screenshots/infinity-pool/01-nmap-scan.png)
 
-22 (SSH) and 80 (HTTP, running on Gunicorn — so a Python app behind the scenes). The nmap output also flagged robots.txt with two disallowed paths, `/internal/` and `/status`, which is basically the box pointing at where to look next.
+22 (SSH) and 80 (HTTP, running on Gunicorn so a Python app behind the scenes). The nmap output also flagged robots.txt with two disallowed paths, `/internal/` and `/status`, which is basically the box pointing at where to look next.
 
 Popped the homepage in the browser too, just the usual hotel-site fluff ("Every detail, observed" — on theme given what's coming).
 
