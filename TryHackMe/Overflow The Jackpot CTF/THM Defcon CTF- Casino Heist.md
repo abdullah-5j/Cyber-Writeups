@@ -6,7 +6,6 @@ Machine got flagged for acting weird late at night, and someone pulled the full 
 unzip attachment-1785961082183.zip
 ```
 
-![unzip](../Screenshots/Overflow%20The%20Jackpot%20CTF/01-unzip-pcap.png)
 
 Got `stolen_jackpot.pcapng` out of it.
 
