@@ -6,7 +6,7 @@ I first checked the provided Python file to see how the flag was encrypted.
 cat challenge.py
 ```
 
-![Challenge source](../Screenshots/b1t_recovery/challenge-source.png)
+![Challenge source](../Screenshots/Overflow%20The%20Jackpot%20CTF/challenge-source.png)
 
 The script uses `os.urandom(4)`, so the XOR key is only 4 bytes long and gets reused across the flag.
 
@@ -32,10 +32,10 @@ I ran the script against the encrypted file.
 python3 solve.py
 ```
 
-![Recovered flag](../Screenshots/b1t_recovery/flag-recovery.png)
+![Recovered flag](../Screenshots/Overflow%20The%20Jackpot%20CTF/flag-recovery.png)
 
 The key was recovered successfully and the plaintext revealed the flag:
 
 ```text
-THM{X0r_K3y_r3c0verY_H4s_N3veR_B33n_Th1S_E@sy}
+THM{X0r_K3y_r3c0verY_***_*****_****_****_****}
 ```
