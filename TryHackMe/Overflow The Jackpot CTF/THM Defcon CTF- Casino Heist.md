@@ -29,9 +29,9 @@ ls -la extracted_http
 
 ![extracted http objects](../Screenshots/Overflow%20The%20Jackpot%20CTF/03-extracted-http-objects.png)
 
-Four files came out: `admin`, `cms`, `flag` (all 469 bytes each) and `stealer` at a chunky 20MB. Ran `file` on all of them — the three small ones turned out to be identical generic 404 pages (someone probing paths that didn't exist), and `stealer` came back as a stripped 64-bit ELF binary. That's the getaway car the challenge briefing was talking about.
+Four files came out: `admin`, `cms`, `flag` (all 469 bytes each) and `stealer` at a chunky 20MB. Ran `file` on all of them the three small ones turned out to be identical generic 404 pages, and `stealer` came back as a stripped 64-bit ELF binary. That's the getaway car the challenge briefing was talking about.
 
-The 404s were a dead end, so I moved on to figuring out where the actual stolen data went. HTTP only showed the download of `stealer`, no upload traffic — so if something got exfiltrated, it went out over a different connection. Listed all the TCP conversations in the capture to check.
+The 404s were a dead end, so I moved on to figuring out where the actual stolen data went. HTTP only showed the download of `stealer`, no upload traffic so if something got exfiltrated, it went out over a different connection. Listed all the TCP conversations in the capture to check.
 
 ```
 tshark -r stolen_jackpot.pcapng -q -z conv,tcp
