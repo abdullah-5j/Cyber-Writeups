@@ -14,7 +14,7 @@ The report was about POWDER WOLF activity against Cascadia Ski and Resort Collec
 
 The first rule was meant to detect external RDP logons. The broken rule was filtering out `203.0.113.*`, but that was actually the attacker range from the report, not a trusted range.
 
-![PR1 Broken Rule](Screenshots/Overflow%20The%20Jackpot%20CTF/02-pr1-broken-rule.png)
+![PR1 Broken Rule](../Screenshots/Overflow%20The%20Jackpot%20CTF/02-pr1-broken-rule.png)
 
 I fixed the logic by filtering real trusted activity instead:
 
@@ -26,7 +26,7 @@ The red team test also showed that resumed RDP sessions can use `LogonType 7`, n
 
 After the fix, all checks passed and I got the flag.
 
-![PR1 Flag](Screenshots/Overflow%20The%20Jackpot%20CTF/03-pr1-flag.png)
+![PR1 Flag](../Screenshots/Overflow%20The%20Jackpot%20CTF/03-pr1-flag.png)
 
 ```text
 THM{Untru5ted_R4nge_Bu5ted}
@@ -38,7 +38,7 @@ THM{Untru5ted_R4nge_Bu5ted}
 
 This one was for SoftPerfect NetScan testing writable admin shares. The original rule looked for `delete.me` in `ShareName`, but the report showed it was actually in `RelativeTargetName`.
 
-![PR2 Broken Rule](Screenshots/Overflow%20The%20Jackpot%20CTF/04-pr2-broken-rule.png)
+![PR2 Broken Rule](../Screenshots/Overflow%20The%20Jackpot%20CTF/04-pr2-broken-rule.png)
 
 I fixed it by detecting:
 
@@ -48,7 +48,7 @@ I fixed it by detecting:
 
 After that, the rule passed validation and red team tests.
 
-![PR2 Flag](Screenshots/Overflow%20The%20Jackpot%20CTF/05-pr2-flag.png)
+![PR2 Flag](../Screenshots/Overflow%20The%20Jackpot%20CTF/05-pr2-flag.png)
 
 ```text
 THM{D3l3t3_M3_G1v3s_1t_4w4y}
@@ -64,7 +64,7 @@ I first fixed it for AnyDesk, then the red team tests showed the rule was too na
 
 So I generalized the rule to catch remote access tools installed as services, while filtering the normal helpdesk installs on workstation hosts like `SNW-PC`, `ALD-PC`, and `TBL-PC`.
 
-![PR3 Flag](Screenshots/Overflow%20The%20Jackpot%20CTF/06-pr3-flag.png)
+![PR3 Flag](../Screenshots/Overflow%20The%20Jackpot%20CTF/06-pr3-flag.png)
 
 ```text
 THM{BaniKed_4ccess_Ch4nnel}
@@ -86,7 +86,7 @@ I first matched the specific 7-Zip + file share behavior, but the red team tests
 
 So I generalized the detection to catch archive tools and PowerShell compressing directly from sensitive network shares, while filtering the known monthly reservation export job.
 
-![PR4 Flag](Screenshots/Overflow%20The%20Jackpot%20CTF/07-pr4-flag.png)
+![PR4 Flag](../Screenshots/Overflow%20The%20Jackpot%20CTF/07-pr4-flag.png)
 
 ```text
 THM{Z1pp3d_Right_0ut_th3_D00r}
@@ -111,7 +111,7 @@ So instead of relying on the file name, I detected the command-line behavior:
 
 I also filtered the legitimate `DiskOptimizer.exe` maintenance tool using its path, original file name, and service account.
 
-![PR5 Flag](Screenshots/Overflow%20The%20Jackpot%20CTF/08-pr5-flag.png)
+![PR5 Flag](../Screenshots/Overflow%20The%20Jackpot%20CTF/08-pr5-flag.png)
 
 ```text
 THM{C4ught_B3f0re_th3_Th4w}
@@ -131,7 +131,7 @@ PR #5: THM{C4ught_B3f0re_th3_Th4w}
 
 All workflows were green at the end.
 
-![All Done](Screenshots/Overflow%20The%20Jackpot%20CTF/09-all-workflows-green.png)
+![All Done](../Screenshots/Overflow%20The%20Jackpot%20CTF/09-all-workflows-green.png)
 
 ---
 
