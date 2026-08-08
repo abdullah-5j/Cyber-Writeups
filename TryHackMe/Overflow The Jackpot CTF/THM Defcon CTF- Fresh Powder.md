@@ -6,7 +6,7 @@ This challenge was a Detection-as-Code style task. Instead of exploiting a machi
 
 The report was about POWDER WOLF activity against Cascadia Ski and Resort Collective. I mainly used the report to understand what happened, and `docs/environment-routines.md` to avoid alerting on normal activity.
 
-![Incident Report](Screenshots/Overflow%20The%20Jackpot%20CTF/01-incident-report.png)
+![Incident Report](../Screenshots/Overflow%20The%20Jackpot%20CTF/01-incident-report.png)
 
 ---
 
