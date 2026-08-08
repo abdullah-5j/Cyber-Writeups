@@ -1,8 +1,6 @@
 # Casino Heist — Forensics 
 
-Machine got flagged for acting weird late at night, and someone pulled the full packet capture before killing it. Task was to figure out what got dropped on the box, dig out the secret it left behind, and use that to unlock whatever got stolen.
-
-Downloaded the task files and unzipped the attachment to get the pcap.
+Machine got flagged for acting weird late at night, and someone pulled the full packet capture before killing it.
 
 ```
 unzip attachment-1785961082183.zip
@@ -152,4 +150,3 @@ Padding checked out clean and out popped the flag:
 THM{J@ckP05_R0bb3ry_VIA_pYth0nN}
 ```
 
-Submitted it and got the green check. Whole chain made sense end to end — a PyInstaller stealer got dropped on the box, grabbed `flag.jackpot`, AES-encrypted it with a hardcoded key baked right into the script, and shipped it out raw over TCP to a listener on port 4444. Key was never actually hidden, just buried in compiled bytecode instead of a config file.
