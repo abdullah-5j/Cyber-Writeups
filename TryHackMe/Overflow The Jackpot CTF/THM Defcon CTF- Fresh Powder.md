@@ -119,15 +119,7 @@ THM{C4ught_B3f0re_th3_Th4w}
 
 ---
 
-## Final Flags
-
-```text
-PR #1: THM{Untru5ted_R4nge_Bu5ted}
-PR #2: THM{D3l3t3_M3_G1v3s_1t_4w4y}
-PR #3: THM{BaniKed_4ccess_Ch4nnel}
-PR #4: THM{Z1pp3d_Right_0ut_th3_D00r}
-PR #5: THM{C4ught_B3f0re_th3_Th4w}
-```
+## Final 
 
 All workflows were green at the end.
 
@@ -135,14 +127,5 @@ All workflows were green at the end.
 
 ---
 
-## What I Learned
 
 This challenge was mainly about detection tuning. The important thing was not just matching the sample attack event. The rule also had to avoid known normal behavior and survive small attacker changes.
-
-Main takeaways:
-
-- Always read the report before editing detections.
-- Check the exact field names in the logs.
-- Do not filter attacker infrastructure by mistake.
-- Environment context matters a lot for false positives.
-- Red team bypass tests are useful because they show where the rule is too narrow.
