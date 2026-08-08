@@ -50,9 +50,9 @@ tshark -r stolen_jackpot.pcapng -q -z follow,tcp,ascii,172.20.0.1:49500,172.20.0
 
 ![tcp stream ascii flag.jackpot](../Screenshots/Overflow%20The%20Jackpot%20CTF/05-tcp-stream-ascii-flagjackpot.png)
 
-Both streams start with the filename `flag.jackpot` followed by a chunk of binary garbage — encrypted data. So the stealer grabbed a file called `flag.jackpot`, encrypted it, and shipped it out over that port 4444 connection. Now I needed the key.
+Both streams start with the filename `flag.jackpot` followed by a chunk of binary garbage encrypted data. So the stealer grabbed a file called `flag.jackpot`, encrypted it, and shipped it out over that port 4444 connection. Now I needed the key.
 
-The briefing said the tool was "built in a hurry" and the key would be "sitting in plain sight" — so the obvious move is to crack open the stealer binary itself. Installed pyinstxtractor-ng through pipx (regular pip install got blocked by Kali's externally-managed-environment thing) and ran it against the binary.
+The briefing said the tool was "built in a hurry" and the key would be "sitting in plain sight" — so the obvious move is to crack open the stealer binary itself. Installed pyinstxtractor-ng through pipx and ran it against the binary.
 
 ```
 pipx install pyinstxtractor-ng
@@ -61,7 +61,7 @@ pyinstxtractor-ng extracted_http/stealer
 
 ![pyinstxtractor unpack](../Screenshots/Overflow%20The%20Jackpot%20CTF/06-pyinstxtractor-unpack.png)
 
-It's a PyInstaller-packed Python binary — explains the 20MB size. Extraction spit out a bunch of files, and one stood out as the real entry point: `stealer.pyc`, matching the binary's own name.
+It's a PyInstaller-packed Python binary explains the 20MB size. Extraction spit out a bunch of files, and one stood out as the real entry point: `stealer.pyc`, matching the binary's own name.
 
 Ran `strings` on it to see if the key was sitting there in plain text.
 
@@ -71,9 +71,9 @@ strings -n 6 stealer_extracted/stealer.pyc
 
 ![strings raw key/iv candidates](../Screenshots/Overflow%20The%20Jackpot%20CTF/07-pyc-strings-raw-keyiv.png)
 
-Two strings jumped out immediately: `J4ckp0tH4ck3rKeys` and `Iv_For_Exf1ltr8!z` — clearly a key and an IV. But I noticed other strings nearby were slightly corrupted (`Cipherr`, `Paddingr` instead of `Cipher`/`Padding`), which meant raw `strings` was bleeding extra characters into some of these — so I didn't trust those values as-is.
+Two strings jumped out immediately: `J4ckp0tH4ck3rKeys` and `Iv_For_Exf1ltr8!z` clearly a key and an IV. But I noticed other strings nearby were slightly corrupted (`Cipherr`, `Paddingr` instead of `Cipher`/`Padding`), which meant raw `strings` was bleeding extra characters into some of these — so I didn't trust those values as-is.
 
-To get a clean read, I wrote a small Python script using the `xdis` library to properly parse the bytecode and dump the actual string constants instead of relying on a raw byte scan.
+To get a clean read, I wrote a small Python script using the `xdis` library to properly parse the bytecode.
 
 ```python
 import sys
@@ -105,7 +105,7 @@ python3 dump_consts.py stealer_extracted/stealer.pyc
 
 ![clean key and iv extracted](../Screenshots/Overflow%20The%20Jackpot%20CTF/08-clean-key-iv-extracted.png)
 
-That confirmed it — the real key is `J4ckp0tH4ck3rKey` and the real IV is `Iv_For_Exf1ltr8!`, both clean 16-byte strings, no trailing junk like the raw strings dump showed. Also saw `172.20.0.3` and `.jackpot` in there, matching what we already found on the wire.
+That confirmed the real key is `J4ckp0tH4ck3rKey` and the real IV is `Iv_For_Exf1ltr8!`, both clean 16-byte strings, no trailing junk like the raw strings dump showed. Also saw `172.20.0.3` and `.jackpot` in there, matching what we already found on the wire.
 
 Now I needed the actual ciphertext bytes. Pulled the same TCP stream again but in hex this time, since ASCII mode mangles binary data.
 
@@ -115,9 +115,9 @@ tshark -r stolen_jackpot.pcapng -q -z follow,tcp,hex,172.20.0.1:49496,172.20.0.3
 
 ![tcp stream hex ciphertext](../Screenshots/Overflow%20The%20Jackpot%20CTF/09-tcp-stream-hex-ciphertext.png)
 
-Clean structure: `flag.jackpot\n` as a plaintext header (13 bytes), followed by exactly 48 bytes of ciphertext — 3 full AES blocks, so AES-CBC made sense.
+Clean structure: `flag.jackpot\n` as a plaintext header (13 bytes), followed by exactly 48 bytes of ciphertext 3 full AES blocks, so AES-CBC made sense.
 
-Got AI to help me put together a quick decrypt script with the key, IV, and ciphertext bytes I'd pulled off the wire.
+Got AI to help me put together a quick decrypt script with the key, IV, and ciphertext bytes.
 
 ```python
 from Crypto.Cipher import AES
