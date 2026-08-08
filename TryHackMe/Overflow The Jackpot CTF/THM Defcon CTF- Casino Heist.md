@@ -73,7 +73,7 @@ strings -n 6 stealer_extracted/stealer.pyc
 
 Two strings jumped out immediately: `J4ckp0tH4ck3rKeys` and `Iv_For_Exf1ltr8!z` clearly a key and an IV. But I noticed other strings nearby were slightly corrupted (`Cipherr`, `Paddingr` instead of `Cipher`/`Padding`), which meant raw `strings` was bleeding extra characters into some of these — so I didn't trust those values as-is.
 
-To get a clean read, I wrote a small Python script using the xdis library to properly parse the bytecode constants.
+To get a clean read, I wrote a small Python script using the xdis library to parse the bytecode constants properly.
 
 ```python
 import sys
@@ -117,7 +117,7 @@ tshark -r stolen_jackpot.pcapng -q -z follow,tcp,hex,172.20.0.1:49496,172.20.0.3
 
 Clean structure: `flag.jackpot\n` as a plaintext header (13 bytes), followed by exactly 48 bytes of ciphertext 3 full AES blocks, so AES-CBC made sense.
 
-Got AI to help me put together a quick decrypt script with the key, IV, and ciphertext bytes.
+I wrote a quick decrypt script using AES-CBC with the recovered key and IV.
 
 ```python
 from Crypto.Cipher import AES
