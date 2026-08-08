@@ -1,4 +1,4 @@
-# Casino Heist — Forensics (90 pts)
+# Casino Heist — Forensics 
 
 Machine got flagged for acting weird late at night, and someone pulled the full packet capture before killing it. Task was to figure out what got dropped on the box, dig out the secret it left behind, and use that to unlock whatever got stolen.
 
