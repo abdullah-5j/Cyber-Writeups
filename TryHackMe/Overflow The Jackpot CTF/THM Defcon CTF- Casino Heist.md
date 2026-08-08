@@ -18,7 +18,7 @@ tshark -r stolen_jackpot.pcapng -q -z io,phs
 
 ![protocol hierarchy](../Screenshots/Overflow%20The%20Jackpot%20CTF/02-protocol-hierarchy.png)
 
-701 frames total, mostly TCP, and only 8 HTTP frames — but one of those HTTP frames is a single ~52KB data blob. That's not a normal page load, something got transferred.
+701 frames total, mostly TCP, and only 8 HTTP frames but one of those HTTP frames is a single ~52KB data blob. That's not a normal page load, something got transferred.
 
 Pulled every file that went over HTTP out of the capture to see what that blob actually was.
 
