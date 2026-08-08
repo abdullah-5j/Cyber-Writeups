@@ -73,7 +73,7 @@ strings -n 6 stealer_extracted/stealer.pyc
 
 Two strings jumped out immediately: `J4ckp0tH4ck3rKeys` and `Iv_For_Exf1ltr8!z` clearly a key and an IV. But I noticed other strings nearby were slightly corrupted (`Cipherr`, `Paddingr` instead of `Cipher`/`Padding`), which meant raw `strings` was bleeding extra characters into some of these — so I didn't trust those values as-is.
 
-To get a clean read, I wrote a small Python script using the `xdis` library to properly parse the bytecode.
+To get a clean read, I wrote a small Python script using the xdis library to properly parse the bytecode constants.
 
 ```python
 import sys
