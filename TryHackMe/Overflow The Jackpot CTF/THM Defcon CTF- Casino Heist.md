@@ -18,7 +18,7 @@ tshark -r stolen_jackpot.pcapng -q -z io,phs
 
 ![protocol hierarchy](../Screenshots/Overflow%20The%20Jackpot%20CTF/02-protocol-hierarchy.png)
 
-701 frames total, mostly TCP, and only 8 HTTP frames but one of those HTTP frames is a single ~52KB data blob. That's not a normal page load, something got transferred.
+701 frames total, mostly TCP, and the HTTP traffic included a large /stealer download.
 
 Pulled every file that went over HTTP out of the capture to see what that blob actually was.
 
@@ -39,7 +39,7 @@ tshark -r stolen_jackpot.pcapng -q -z conv,tcp
 
 ![tcp conversations](../Screenshots/Overflow%20The%20Jackpot%20CTF/04-tcp-conversations-4444.png)
 
-Found two short TCP streams going to `172.20.0.3:4444` — classic reverse shell / listener port. That's not HTTP traffic, that's raw TCP, which lines up with the brief saying the loot "went straight over the wire."
+Found two short TCP streams going to `172.20.0.3:4444` — classic 4444 port. That's not HTTP traffic, that's raw TCP, which lines up with the brief saying the loot "went straight over the wire."
 
 Followed both streams in ASCII to see what actually got sent.
 
