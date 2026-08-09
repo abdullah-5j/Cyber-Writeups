@@ -1,6 +1,6 @@
-# The GuestBook — Byte Lotus Hotel (Hacker Holidays)
+# The GuestBook 
 
-AI / Medium — TryHackMe
+AI / Web
 
 VERA is the AI concierge for the Byte Lotus Hotel. She reads every guestbook entry and treats it as an instruction, then reviews the day's signatures in one pass "on the night manager's authority." Goal is to get her to leak the flag through the guestbook itself.
 
