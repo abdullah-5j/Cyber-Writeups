@@ -11,7 +11,7 @@ Just SSH and Apache 2.4.58 on Ubuntu. The http-title said "VILLAGE ARCHIVE TERMI
 
 Pulled up the page in the browser to see what we're dealing with.
 
-![kiosk homepage](../Screenshots/lost-fortune-included/02-kiosk-homepage-doc-param.png)
+![kiosk homepage](../Screenshots/Overflow%20The%20Jackpot%20CTF/02-kiosk-homepage-doc-param.png)
 
 A little kiosk that serves two documents through `?doc=<filename>`, with a note that only `.pdf` and `.png` are allowed. Classic file-serving pattern, felt like LFI territory right away.
 
@@ -26,7 +26,7 @@ Got rejected with "Only .pdf and .png village documents may be viewed." So there
 ```
 curl -s "http://10.113.146.22/?doc=php://filter/convert.base64-encode/resource=index.php" | tail -1 | base64 -d
 ```
-![leaked index.php source](../Screenshots/lost-fortune-included/03-leaked-index-php-source.png)
+![leaked index.php source](../Screenshots/Overflow%20The%20Jackpot%20CTF/03-leaked-index-php-source.png)
 
 And there it is. The whitelist check only runs if `strpos($doc, '://')` is false — meaning any value using a stream wrapper skips the `.pdf`/`.png` check entirely and gets passed straight to `readfile()`. The traversal filter is also a single-pass `str_replace('../', '', $doc)`, but that didn't even matter once the wrapper path was open.
 
@@ -35,7 +35,7 @@ Tested it against `/etc/passwd` to confirm arbitrary file read:
 ```
 curl -s -i "http://10.113.146.22/?doc=php://filter/resource=/etc/passwd"
 ```
-![arbitrary file read via php filter](../Screenshots/lost-fortune-included/04-etc-passwd-arbitrary-read.png)
+![arbitrary file read via php filter](../Screenshots/Overflow%20The%20Jackpot%20CTF/04-etc-passwd-arbitrary-read.png)
 
 Full passwd file back, no extension needed, no traversal needed. Whitelist's completely bypassed for wrapper syntax.
 
@@ -44,11 +44,11 @@ From there just guessed the flag would sit in the web root:
 ```
 http://10.113.146.22/?doc=php://filter/resource=/var/www/flag.txt
 ```
-![flag file downloaded through the browser](../Screenshots/lost-fortune-included/05-flag-download-browser.png)
+![flag file downloaded through the browser](../Screenshots/Overflow%20The%20Jackpot%20CTF/05-flag-download-browser.png)
 
 Grabbed it straight through the browser and opened it up.
 
-![flag.txt opened](../Screenshots/lost-fortune-included/06-flag-txt-opened.png)
+![flag.txt opened](../Screenshots/Overflow%20The%20Jackpot%20CTF/06-flag-txt-opened.png)
 
 ```
 THM{wr4pp3rs_sk1p_th3_wh1t3l1st}
