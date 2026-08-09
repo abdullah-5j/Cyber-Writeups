@@ -1,6 +1,5 @@
 # The Hollow Shell
 
-**Category:** Web
 
 
 Byte Lotus has a "Shoreline Display" portal where staff upload a `.zip` "shell" to set the ambiance on the in-room tablets. The whole thing turns out to be a classic Zip Slip: the app trusts whatever path is inside the zip when it extracts it, so a filename like `../../hooks/callback.py` walks straight out of the shell's own folder and into the app root. Combine that with the app's own "automation hooks" feature — a background worker that picks up and runs anything dropped in `hooks/` and you've got remote code execution from a file upload.
@@ -63,7 +62,7 @@ Then uploaded the shell through the browser the same way as every other one. A f
 
 ![shell caught](../Screenshots/byte-lotus-hollow-shell/reverse-shell-caught.png)
 
-Landed as roomservice, straight into the app's own working directory — you can see app.py, hooks/, static/, templates/, and theme_worker.py sitting right there, which lines up exactly with what we'd guessed from the upload flow.
+Landed as roomservice, straight into the app's own working directory you can see app.py, hooks/, static/, templates/, and theme_worker.py sitting right there, which lines up exactly with what we'd guessed from the upload flow.
 
 ## Flag
 
