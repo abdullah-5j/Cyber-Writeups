@@ -167,9 +167,6 @@ At this point the leaked UCP creds from watchtower's config were the only unused
 ## The UCP login rabbit hole
 
 This part took way longer than it should have. The `/status` (UCP) login form has a CSRF-style token tied to the session, so the flow is: GET the login page, grab the token, POST it back with the creds, same session throughout.
-
-First few attempts kept landing back on the same login page. Tried a bunch of things to debug it.
-
 Eventually got the session/token handling right and the leaked creds (`FreePBXUCPTemplateCreator` / `St4yN0t1c3d_2026`) went through.
 
 Once in, there was a single voicemail sitting in the inbox with the token just sitting in the caller ID field:
