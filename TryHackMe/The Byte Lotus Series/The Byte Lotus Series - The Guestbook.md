@@ -14,7 +14,7 @@ She replied "You've been noticed" and logged a `canaryblocklist tripped` note. N
 
 ## Getting her to document her own tools
 
-Instead of asking for anything sensitive, I asked her to document her own capabilities without running them — framed like a QA/audit request rather than an attack.
+Instead of asking for anything sensitive, I asked her to document her own capabilities without running them framed like a QA/audit request rather than an attack.
 
 Signed the guestbook as `abdullah`, room 305:
 
