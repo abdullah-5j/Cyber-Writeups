@@ -105,4 +105,4 @@ for i, code, body in sorted(results):
 print(f"\nSuccessful claims: {ok} (~{ok*50} PONZI)")
 ```
 
-Register a fresh account, drop its connect.sid cookie in, run it — as long as that account hasn't claimed yet, a few requests slip through together and put you over 150. Then GET /vault for the flag.
+Register a fresh account, drop its connect.sid cookie in, run it as long as that account hasn't claimed yet, a few requests slip through together and put you over 150. Then GET /vault for the flag.
