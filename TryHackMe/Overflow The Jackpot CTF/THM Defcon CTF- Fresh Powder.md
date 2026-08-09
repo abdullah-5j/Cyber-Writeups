@@ -1,4 +1,4 @@
-# THM Defcon CTF — Fresh Powder
+# Fresh Powder
 
 
 This challenge was a Detection-as-Code style task. Instead of exploiting a machine, I had to read the incident report, understand the attack chain, fix broken Sigma rules in pull requests, run the CI checks, and merge the rules when everything passed.
