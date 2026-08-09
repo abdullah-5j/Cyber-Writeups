@@ -1,6 +1,5 @@
-# The Byte Lotus Hotel (Beach Bar)
+# Beach Bar
 
-**Category:** Boot2Root ·
 **Tags:** `flask` `pyyaml-deserialization` `rce` `credential-reuse` `linux`
 
 The beach bar's jukebox takes song requests from anyone with a phone. The briefing hints at three things — a DJ who never logs out, a queue that accepts more than song titles, and a service quietly announcing "something" — and each one turns out to be a real finding on the box.
