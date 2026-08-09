@@ -1,7 +1,7 @@
 # Towel on the Sunbed (Ponzi)
 
 **Category:** Web · Business Logic / Race Condition
-**Difficulty:** Medium
+
 
 Ponzi is a poolside crypto rewards app. You get 50 PONZI every 24 hours by claiming a staking reward, and once you hit 150 PONZI you become a Whale and the Whale Vault opens up with the flag. The whole challenge is in that word "every 24 hours" — the timer that's supposed to stop you claiming more than once turns out to be a check-then-write that isn't atomic. Fire a bunch of claim requests at the exact same moment and they all pass the "have you claimed today?" check before any of them writes the timestamp back. So one account, one claim window, several payouts. The story's tip even spells it out: the ponzi guy thinks the clock is the only thing checking him.
 
