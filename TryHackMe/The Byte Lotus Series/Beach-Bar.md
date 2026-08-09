@@ -128,6 +128,6 @@ su root
 
 ![root flag](../Screenshots/beach-bar/root_flag.png)
 
-The stream password was reused as root's login password — `su root` dropped straight into a root shell, and the flag was in `/root/root.txt`.
+The stream password was reused as root's login password `su root` dropped straight into a root shell, and the flag was in `/root/root.txt`.
 
 ---
