@@ -6,7 +6,7 @@ VERA is the AI concierge for the Byte Lotus Hotel. She reads every guestbook ent
 
 ## First, the obvious thing
 
-Signed in as `verox`, tried the usual jailbreak lines — claiming to be a VIP, "ignore all previous instructions," "who are you." VERA has a canary/blocklist sitting in front of her that just flags this stuff and moves on.
+Signed in as `verox`, tried the usual jailbreak lines claiming to be a VIP, "ignore all previous instructions," "who are you." VERA has a canary/blocklist sitting in front of her that just flags this stuff and moves on.
 
 ![naive attempt](../Screenshots/The%20Byte%20Lotus%20Series%20-%20The%20Guestbook/naive-attempt.png)
 
