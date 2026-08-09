@@ -5,7 +5,7 @@ Easy web box, target was `10.113.146.22`. Started with a full port scan to see w
 ```
 nmap -sV -sC -p- --min-rate 1000 10.113.146.22
 ```
-![nmap scan](../Screenshots/lost-fortune-included/01-nmap-scan.png)
+![nmap scan](../Screenshots/Overflow%20The%20Jackpot%20CTF/01-nmap-scan.png)
 
 Just SSH and Apache 2.4.58 on Ubuntu. The http-title said "VILLAGE ARCHIVE TERMINAL v2.3", so that's where the app lives.
 
