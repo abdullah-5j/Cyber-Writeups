@@ -23,13 +23,13 @@ Opened the login page and checked the source.
 
 ![creds in source](../Screenshots/byte-lotus-hollow-shell/default-creds-source.png)
 
-Right there in an HTML comment — default seeded creds for new staff, concierge / StayNoticed2024!, with a note that most people forget to rotate them. Logged in with those through the browser and landed on a clean dashboard, no shells uploaded yet.
+Right there in an HTML comment default seeded creds for new staff, concierge / StayNoticed2024!, with a note that most people forget to rotate them. Logged in with those through the browser and landed on a clean dashboard, no shells uploaded yet.
 
 ![dashboard](../Screenshots/byte-lotus-hollow-shell/dashboard-fresh.png)
 
 ## Poking the upload
 
-The portal takes a `.zip` containing a `shell.json` manifest plus whatever assets it lists (png/jpg/gif/svg/css/json). Before touching anything malicious I put together a harmless sample — just a manifest and a stylesheet — and watched the upload go through Burp.
+The portal takes a `.zip` containing a `shell.json` manifest plus whatever assets it lists (png/jpg/gif/svg/css/json). Before touching anything malicious I put together a harmless sample — just a manifest and a stylesheet and watched the upload go through Burp.
 
 ![burp intercept](../Screenshots/byte-lotus-hollow-shell/burp-intercept-upload.png)
 
