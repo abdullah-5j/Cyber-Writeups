@@ -16,9 +16,7 @@ nmap -sC -sV -p- -T4 <target IP>
 
 Three ports open
 >  22
-> 
 >  80
-> 
 >  8080
 
 ## poking the website
