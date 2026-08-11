@@ -12,7 +12,7 @@ started with a full port scan.
 nmap -sC -sV -p- -T4 <target IP>
 ```
 
-![nmap scan](../Screenshots/hc0n/01-nmap-scan.png)
+![nmap scan](../Screenshots/hc0n%20Christmas%20CTF/01-nmap-scan.png)
 
 three ports open. 22 (ssh), 80 (apache, the main site), and 8080 which just spits out the same base64 blob on literally any request, even a 404. that's not a real web server, it's a static ciphertext waiting to be decrypted later.
 
@@ -24,7 +24,7 @@ ran gobuster against port 80 to see what's actually there.
 gobuster dir -u http://<target IP>/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x txt,php
 ```
 
-![gobuster](../Screenshots/hc0n/03-gobuster-dirscan.png)
+![gobuster](../Screenshots/hc0n%20Christmas%20CTF/03-gobuster-dirscan.png)
 
 got `login.php`, `register.php`, an `/admin` dir, and a `robots.txt`. checked robots.txt first since it's free info.
 
@@ -32,7 +32,7 @@ got `login.php`, `register.php`, an `/admin` dir, and a `robots.txt`. checked ro
 curl http://<target IP>/robots.txt
 ```
 
-![robots.txt](../Screenshots/hc0n/02-robots-txt.png)
+![robots.txt](../Screenshots/hc0n%20Christmas%20CTF/02-robots-txt.png)
 
 jackpot. it names the admin username straight up — `administratorhc0nwithyhackme` — and points at `iv.png` with a "3301" hint, so whatever's in that image is the AES IV, encoded as runes.
 
@@ -64,7 +64,7 @@ ran padbuster to decrypt the cookie and confirm what we're working with:
 padbuster http://<target IP>/login.php tWFjhrztc6CU%2BaQt4b%2FHzuN7JHhIAM65 8 --cookies "hcon=tWFjhrztc6CU%2BaQt4b%2FHzuN7JHhIAM65" --encoding 0
 ```
 
-![padbuster decrypt](../Screenshots/hc0n/08-padbuster-decrypt-cookie.png)
+![padbuster decrypt](../Screenshots/hc0n%20Christmas%20CTF/08-padbuster-decrypt-cookie.png)
 
 decrypts to `user=verox` — my own username, so the cookie format is confirmed as `user=<name>`. now forge one for the admin account using the same oracle in encrypt mode:
 
@@ -72,11 +72,11 @@ decrypts to `user=verox` — my own username, so the cookie format is confirmed 
 padbuster http://<target IP>/login.php tWFjhrztc6CU%2BaQt4b%2FHzuN7JHhIAM65 8 --cookies "hcon=tWFjhrztc6CU%2BaQt4b%2FHzuN7JHhIAM65" --encoding 0 -plaintext user=administratorhc0nwithyhackme
 ```
 
-![padbuster forge admin cookie](../Screenshots/hc0n/09-padbuster-forge-admin-cookie.png)
+![padbuster forge admin cookie](../Screenshots/hc0n%20Christmas%20CTF/09-padbuster-forge-admin-cookie.png)
 
 got a forged ciphertext back. dropped it into the `hcon` cookie value in the browser and hit the homepage.
 
-![admin auth + secret key leak](../Screenshots/hc0n/10-admin-page-secret-key-leak.png)
+![admin auth + secret key leak](../Screenshots/hc0n%20Christmas%20CTF/10-admin-page-secret-key-leak.png)
 
 logged in as `administratorhc0nwithyhackme`, and the page straight up prints the AES key: `hconkwithyhackme`. padding oracle fully paid off.
 
@@ -84,7 +84,7 @@ logged in as `administratorhc0nwithyhackme`, and the page straight up prints the
 
 back to `iv.png` from robots.txt.
 
-![iv runes](../Screenshots/hc0n/05-iv-runes.png)
+![iv runes](../Screenshots/hc0n%20Christmas%20CTF/05-iv-runes.png)
 
 11 glyphs, cicada 3301 style Gematria Primus runes. matched each one against the chart by hand, got:
 
@@ -98,7 +98,7 @@ THEIVFORINGEOAEY
 
 now had all three pieces: key `hconkwithyhackme`, IV `THEIVFORINGEOAEY`, and the ciphertext from port 8080 (`RwO9+7tuGJ3nc1cIhN4E31WV/qeYGLURrcS7K+Af85w=`).
 
-![port 8080 ciphertext](../Screenshots/hc0n/11-port8080-ciphertext.png)
+![port 8080 ciphertext](../Screenshots/hc0n%20Christmas%20CTF/11-port8080-ciphertext.png)
 
 decrypted straight from the terminal with openssl, no online tools:
 
@@ -114,11 +114,11 @@ so the ssh username is `thedarktangent`.
 
 still had `/hide-folders/` from the gobuster run, with two subdirs inside.
 
-![hide-folders listing](../Screenshots/hc0n/12-hide-folders-listing.png)
+![hide-folders listing](../Screenshots/hc0n%20Christmas%20CTF/12-hide-folders-listing.png)
 
 `/hide-folders/1/` returns 405 on a normal GET.
 
-![405 method not allowed](../Screenshots/hc0n/13-hide-folders-405.png)
+![405 method not allowed](../Screenshots/hc0n%20Christmas%20CTF/13-hide-folders-405.png)
 
 swapped the verb to OPTIONS instead:
 
@@ -132,7 +132,7 @@ response came back with: `hax0r :3 you win firts part of the ssh password` and t
 
 `/hide-folders/2/` had a file called `hola`, 8.6K.
 
-![hola binary](../Screenshots/hc0n/15-hola-binary-download.png)
+![hola binary](../Screenshots/hc0n%20Christmas%20CTF/15-hola-binary-download.png)
 
 ```
 curl -O http://<target IP>/hide-folders/2/hola
@@ -148,7 +148,7 @@ ltrace -s 100 ./hola
 
 typed in a throwaway username/password (`stuxnet` / `aaa`) and watched the trace:
 
-![ltrace password reveal](../Screenshots/hc0n/14-ltrace-password-part2.png)
+![ltrace password reveal](../Screenshots/hc0n%20Christmas%20CTF/14-ltrace-password-part2.png)
 
 `strcmp("aaa", "n$@#PDuliL")` — there's the real password sitting right in the trace. way faster than digging through a disassembler by hand.
 
@@ -160,13 +160,13 @@ ssh'd in with `thedarktangent` and the combined password `Gf7MRr55n$@#PDuliL`.
 ssh thedarktangent@<target IP>
 ```
 
-![ssh login](../Screenshots/hc0n/16-ssh-login-thedarktangent.png)
+![ssh login](../Screenshots/hc0n%20Christmas%20CTF/16-ssh-login-thedarktangent.png)
 
 ```
 cat user.txt
 ```
 
-![user flag](../Screenshots/hc0n/17-user-flag.png)
+![user flag](../Screenshots/hc0n%20Christmas%20CTF/17-user-flag.png)
 
 **user flag: `thm{hc0n_christmas_2019!!!}`**
 
@@ -210,7 +210,7 @@ crash landed with RBP = `maaanaaa`. ran it through pwntools' offset lookup:
 pwn cyclic -l maaanaaa
 ```
 
-![cyclic offset](../Screenshots/hc0n/22-cyclic-offset-48.png)
+![cyclic offset](../Screenshots/hc0n%20Christmas%20CTF/22-cyclic-offset-48.png)
 
 offset is 48. add 8 bytes for the saved return address on 64-bit, so 56 bytes of junk before we control RIP.
 
@@ -226,7 +226,7 @@ gdb -q ./hc0n
 r < payload.in
 ```
 
-![rip control confirmed](../Screenshots/hc0n/23-rip-control-confirmed.png)
+![rip control confirmed](../Screenshots/hc0n%20Christmas%20CTF/23-rip-control-confirmed.png)
 
 `RIP = 0xfffffefe42424343` — exactly the bytes planted. full control at offset 56, confirmed.
 
@@ -294,7 +294,7 @@ ran it:
 python3 exploit.py
 ```
 
-![exploit landing root shell](../Screenshots/hc0n/24-exploit-root-shell.png)
+![exploit landing root shell](../Screenshots/hc0n%20Christmas%20CTF/24-exploit-root-shell.png)
 
 dropped into a `#` prompt. checked it wasn't just cosmetic:
 
@@ -304,7 +304,7 @@ whoami
 cat /root/root.txt
 ```
 
-![root flag](../Screenshots/hc0n/25-root-flag.png)
+![root flag](../Screenshots/hc0n%20Christmas%20CTF/25-root-flag.png)
 
 `uid=0(root)` confirmed, and the flag's right there.
 
