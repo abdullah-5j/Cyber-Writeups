@@ -39,7 +39,7 @@ curl http://<target IP>/robots.txt
 
 ![robots.txt](../Screenshots/hc0n%20Christmas%20CTF/02-robots-txt.png)
 
-jackpot. it names the admin username straight up — `administratorhc0nwithyhackme` — and points at `iv.png` with a "3301" hint, so whatever's in that image is the AES IV, encoded as runes.
+jackpot. it names the admin username straight up `administratorhc0nwithyhackme` and points at `iv.png`.
 
 ## the admin apk (dead end, but worth checking)
 
@@ -49,7 +49,7 @@ jackpot. it names the admin username straight up — `administratorhc0nwithyhack
 jadx -d java_sources app-release.apk
 ```
 
-inside, the app's `enc()`/`dec()` methods confirm it's using `AES/CBC/PKCS5Padding`, but the hardcoded key and IV strings in the source are literally `"SEARCHTHESECRETKEY"` and `"SEARCHTHESECRETIV"` — placeholders, not the real values. so the apk doesn't hand you the key, it just proves the cipher mode. useful context, not a shortcut.
+inside, the app's `enc()`/`dec()` methods confirm it's using `AES/CBC/PKCS5Padding`, but the hardcoded key and IV strings in the source are literally `"SEARCHTHESECRETKEY"` and `"SEARCHTHESECRETIV"` placeholders, not the real values. so the apk doesn't hand you the key, it just proves the cipher mode. useful context, not a shortcut.
 
 ## padding oracle on the login cookie
 
@@ -59,7 +59,7 @@ registered an account, logged in, grabbed the `hcon` session cookie from devtool
 hcon = tWFjhrztc6CU%2BaQt4b%2FHzuN7JHhIAM65
 ```
 
-decoded that's 24 bytes, so 8-byte blocks (not 16 like i first assumed for AES — turned out this cipher's block size just divides cleanly by 8, learned that the hard way after padbuster errored out on 16).
+decoded that's 24 bytes, so 8-byte blocks.
 
 checked for an oracle first before committing to a full padbuster run — tampering with the last byte of the cookie changed the response size massively (1488 bytes valid vs 15 bytes tampered), so yeah, there's a real oracle here.
 
@@ -71,7 +71,7 @@ padbuster http://<target IP>/login.php tWFjhrztc6CU%2BaQt4b%2FHzuN7JHhIAM65 8 --
 
 ![padbuster decrypt](../Screenshots/hc0n%20Christmas%20CTF/08-padbuster-decrypt-cookie.png)
 
-decrypts to `user=verox` — my own username, so the cookie format is confirmed as `user=<name>`. now forge one for the admin account using the same oracle in encrypt mode:
+decrypts to `user=verox` my own username, so the cookie format is confirmed as `user=<name>`. now forge one for the admin account using the same oracle in encrypt mode:
 
 ```
 padbuster http://<target IP>/login.php tWFjhrztc6CU%2BaQt4b%2FHzuN7JHhIAM65 8 --cookies "hcon=tWFjhrztc6CU%2BaQt4b%2FHzuN7JHhIAM65" --encoding 0 -plaintext user=administratorhc0nwithyhackme
