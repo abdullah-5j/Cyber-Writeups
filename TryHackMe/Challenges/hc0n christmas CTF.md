@@ -14,7 +14,10 @@ nmap -sC -sV -p- -T4 <target IP>
 
 ![nmap scan](../Screenshots/hc0n%20Christmas%20CTF/01-nmap-scan.png)
 
-three ports open. 22 (ssh), 80 (apache, the main site), and 8080 which just spits out the same base64 blob on literally any request, even a 404. that's not a real web server, it's a static ciphertext waiting to be decrypted later.
+Three ports open
+> 22
+> 80
+> 8080
 
 ## poking the website
 
