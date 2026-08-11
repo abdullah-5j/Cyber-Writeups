@@ -1,8 +1,8 @@
-# hc0n Christmas CTF (TryHackMe)
+# hc0n Christmas CTF
 
-room: https://tryhackme.com/room/hc0nchristmasctf
+Room: https://tryhackme.com/room/hc0nchristmasctf
 
-box is a Christmas-themed CTF that chains a padding oracle attack, a Cicada 3301 style rune cipher, AES-CBC decryption, HTTP verb tampering, binary reversing, and a stack buffer overflow with an SROP chain to get root. took a while but every step is real, nothing skipped.
+Honestly one of the harder boxes I've done on THM. Every technique clicked eventually, but nothing came easy. I hit dead ends, wrong assumptions, and had to backtrack more than once. Ended up being one of those challenges that's genuinely satisfying once root pops, because you know you earned it.
 
 ## recon
 
