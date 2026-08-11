@@ -148,7 +148,7 @@ typed in a throwaway username/password (`stuxnet` / `aaa`) and watched the trace
 
 ![ltrace password reveal](../Screenshots/hc0n%20Christmas%20CTF/14-ltrace-password-part2.png)
 
-`strcmp("aaa", "n$@#PDuliL")` — there's the real password sitting right in the trace. way faster than digging through a disassembler by hand.
+`strcmp("aaa", "n$@#PDuliL")` there's the real password sitting right in the trace. way faster than digging through a disassembler by hand.
 
 ## user flag
 
