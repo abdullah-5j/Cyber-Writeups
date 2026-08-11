@@ -15,9 +15,9 @@ nmap -sC -sV -p- -T4 <target IP>
 ![nmap scan](../Screenshots/hc0n%20Christmas%20CTF/01-nmap-scan.png)
 
 Three ports open
-> 22
-> 80
-> 8080
+>  >22
+>  >80
+>  >8080
 
 ## poking the website
 
