@@ -47,7 +47,7 @@ jackpot. it names the admin username straight up `administratorhc0nwithyhackme` 
 jadx -d java_sources app-release.apk
 ```
 
-inside, the app's `enc()`/`dec()` methods confirm it's using `AES/CBC/PKCS5Padding`, but the hardcoded key and IV strings in the source are literally `"SEARCHTHESECRETKEY"` and `"SEARCHTHESECRETIV"` placeholders, not the real values. so the apk doesn't hand you the key, it just proves the cipher mode. useful context, not a shortcut.
+inside, the app's `enc()`/`dec()` methods confirm it's using `AES/CBC/PKCS5Padding`.
 
 ## padding oracle on the login cookie
 
@@ -59,7 +59,7 @@ hcon = tWFjhrztc6CU%2BaQt4b%2FHzuN7JHhIAM65
 
 decoded that's 24 bytes, so 8-byte blocks.
 
-checked for an oracle first before committing to a full padbuster run — tampering with the last byte of the cookie changed the response size massively (1488 bytes valid vs 15 bytes tampered), so yeah, there's a real oracle here.
+checked for an oracle first before committing to a full padbuster run tampering with the last byte of the cookie changed the response size massively (1488 bytes valid vs 15 bytes tampered), so yeah, there's a real oracle here.
 
 ran padbuster to decrypt the cookie and confirm what we're working with:
 
@@ -81,7 +81,7 @@ got a forged ciphertext back. dropped it into the `hcon` cookie value in the bro
 
 ![admin auth + secret key leak](../Screenshots/hc0n%20Christmas%20CTF/10-admin-page-secret-key-leak.png)
 
-logged in as `administratorhc0nwithyhackme`, and the page straight up prints the AES key: `hconkwithyhackme`. padding oracle fully paid off.
+logged in as `administratorhc0nwithyhackme`, and the page straight up prints the AES key: `hconkwith******`. padding oracle fully paid off.
 
 ## the runes
 
