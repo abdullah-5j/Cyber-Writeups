@@ -1,7 +1,4 @@
-# Eavesdropper — TryHackMe
-
-**Difficulty:** Medium
-**Platform:** TryHackMe
+# Eavesdropper 
 
 ## Description
 
