@@ -1,7 +1,5 @@
 # Eavesdropper 
 
-## Description
-
 > Listen closely, you might hear a password!
 
 After uncovering user Frank's SSH private key, we're tasked with breaking into the target environment, escalating privileges, and capturing the root flag.
