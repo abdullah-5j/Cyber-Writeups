@@ -166,7 +166,7 @@ cat user.txt
 
 ![user flag](../Screenshots/hc0n%20Christmas%20CTF/17-user-flag.png)
 
-**user flag: `thm{hc0n_christmas_2019!!!}`**
+**user flag: `thm{hc0n_*********_******}`**
 
 ## privesc — suid binary
 
@@ -306,10 +306,6 @@ cat /root/root.txt
 
 `uid=0(root)` confirmed, and the flag's right there.
 
-**root flag: `thm{3xplo1t_my_m1nd}`**
-
-## wrap up
-
-full chain start to finish: recon → padding oracle to forge an admin cookie → AES key leak → rune cipher for the IV → AES-CBC decrypt for the ssh username → HTTP verb tampering for password part 1 → `ltrace` for password part 2 → user shell → SUID binary with a classic offset-56 buffer overflow → SROP-style ROP chain for `execve("/bin/sh")` → root.
+**root flag: `thm{3xplo1t_**_****}`**
 
 good box, lot of different skills touched in one go.
