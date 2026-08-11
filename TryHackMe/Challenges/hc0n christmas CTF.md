@@ -4,6 +4,8 @@ Room: https://tryhackme.com/room/hc0nchristmasctf
 
 Honestly one of the harder boxes I have done on THM. Every technique clicked eventually, but nothing came easy. I hit dead ends, wrong assumptions, and had to backtrack more than once. Ended up being one of those challenges that's genuinely satisfying once root pops, because you know you earned it.
 
+![room banner](../Screenshots/hc0n%20Christmas%20CTF/room.png)
+
 ## recon
 
 started with a full port scan.
