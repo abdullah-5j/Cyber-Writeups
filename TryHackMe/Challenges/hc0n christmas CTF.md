@@ -104,11 +104,6 @@ now had all three pieces: key `hconkwithyhackme`, IV `THEIVFORINGEOAEY`, and the
 ![port 8080 ciphertext](../Screenshots/hc0n%20Christmas%20CTF/11-port8080-ciphertext.png)
 
 decrypted straight from the terminal with openssl, no online tools:
-
-```
-echo "RwO9+7tuGJ3nc1cIhN4E31WV/qeYGLURrcS7K+Af85w=" | base64 -d | openssl enc -aes-128-cbc -d -K $(echo -n "hconkwithyhackme" | xxd -p) -iv $(echo -n "THEIVFORINGEOAEY" | xxd -p) -nopad
-```
-
 output: `user ssh <3 thedarktangent`
 
 so the ssh username is `thedarktangent`.
@@ -129,7 +124,7 @@ swapped the verb to OPTIONS instead:
 curl -s -X OPTIONS http://<target IP>/hide-folders/1/
 ```
 
-response came back with: `hax0r :3 you win firts part of the ssh password` and the password chunk — `Gf7MRr55`.
+response came back with: `hax0r :3 you win firts part of the ssh password` and the password chunk `Gf7MRr55`.
 
 ## password part 2 — reversing the binary
 
@@ -142,7 +137,7 @@ curl -O http://<target IP>/hide-folders/2/hola
 file hola
 ```
 
-confirmed ELF 64-bit, not stripped. ran `strings` first looking for a hardcoded password, came up empty — the check isn't a plain string comparison. went straight to `ltrace` instead of firing up a full disassembler:
+confirmed ELF 64-bit, not stripped. ran `strings` first looking for a hardcoded password, came up empty the check isn't a plain string comparison. went straight to `ltrace` instead of firing up a full disassembler:
 
 ```
 chmod +x ./hola
