@@ -51,7 +51,7 @@ I write a letter just to check what we get from it.
 
 ![Write a love letter](../Screenshots/Love%20at%20First%20Breach%202026/06_write_love_letter.png)
 
-Once the letter is saved, I open it and look at the URL — it contains the number **3**.
+Once the letter is saved, I open it and look at the URL it contains the number **3**.
 
 ```
 http://10.112.137.43:5000/letter/3
@@ -61,7 +61,7 @@ http://10.112.137.43:5000/letter/3
 
 Let's try to change it and check what happens.
 
-When I change the ID to **1**, it gives us the flag — meaning letter #1 belongs to another user, and there is no access control checking whether the logged-in user actually owns that letter ID.
+When I change the ID to **1**, it gives us the flag meaning letter #1 belongs to another user, and there is no access control checking whether the logged-in user actually owns that letter ID.
 
 ```
 http://10.112.137.43:5000/letter/1
@@ -69,7 +69,7 @@ http://10.112.137.43:5000/letter/1
 
 ![IDOR - flag in another user's letter](../Screenshots/Love%20at%20First%20Breach%202026/08_idor_flag.png)
 
-Letter #1 turns out to belong to another user ("Gonz0") titled *"To my secret Valentine"* — and it contains the flag directly in the message body.
+Letter #1 turns out to belong to another user ("Gonz0") titled *"To my secret Valentine"* and it contains the flag directly in the message body.
 
 ---
 
@@ -81,12 +81,3 @@ THM{1_c4n_r3ad_4ll_l3tters_w1th_th1s_1d0r}
 
 ---
 
-## Vulnerability Summary
-
-| | |
-|---|---|
-| **Vulnerability** | Insecure Direct Object Reference (IDOR) |
-| **Location** | `/letter/<id>` endpoint |
-| **Root Cause** | Letter IDs are sequential and predictable, and the server does not verify that the requesting user owns the letter before returning it |
-| **Impact** | Any authenticated user can read any other user's private love letter by simply incrementing/decrementing the ID in the URL |
-| **Fix** | Enforce server-side ownership checks (verify `letter.user_id == current_user.id` before returning data) and/or use non-sequential, unguessable identifiers (UUIDs) |
