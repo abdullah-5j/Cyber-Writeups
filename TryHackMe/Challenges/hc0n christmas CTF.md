@@ -105,9 +105,9 @@ now had all three pieces: key `hconkwithyhackme`, IV `THEIVFORINGEOAEY`, and the
 
 ![port 8080 ciphertext](../Screenshots/hc0n%20Christmas%20CTF/11-port8080-ciphertext.png)
 
-decrypted straight from the terminal with openssl, no online tools:
-output: `user ssh <3 thedarktangent`
+With all the available information (Ciphertext, secret key and IV), we can proceed and decode the AES-CBC block ciphertext with an [online tool](https://www.devglan.com/online-tools/aes-encryption-decryption).
 
+output: `user ssh <3 thedarktangent`
 so the ssh username is `thedarktangent`.
 
 ## password part 1 — http verb tampering
