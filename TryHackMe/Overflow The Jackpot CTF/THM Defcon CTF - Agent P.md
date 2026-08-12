@@ -21,18 +21,20 @@ Just two ports open - SSH and Apache running WordPress 6.9.
 Ran gobuster against the root of the site to see what's there.
 
 ```
-gobuster dir -u http://10.112.132.213/ -w /usr/share/wordlists/dirb/common.txt
+gobuster dir -u http://10.112.132.213/wp-content/plugins/ -w /home/anonymous/.local/nuclei-templates/helpers/wordlists/wordpress-plugins.txt -t 50
+
 ```
 
-![gobuster root](../Screenshots/Overflow%20The%20Jackpot%20CTF/02-gobuster-root.png)
+![gobuster plugins](../Screenshots/Overflow%20The%20Jackpot%20CTF/03-gobuster-plugins.png)
 
 Nothing crazy, standard WP structure. Went after the plugins directory next.
 
 ```
-gobuster dir -u http://10.112.132.213/wp-content/plugins/ -w /home/anonymous/.local/nuclei-templates/helpers/wordlists/wordpress-plugins.txt -t 50
+gobuster dir -u http://10.112.132.213/ -w /usr/share/wordlists/dirb/common.txt
+
 ```
 
-![gobuster plugins](../Screenshots/Overflow%20The%20Jackpot%20CTF/03-gobuster-plugins.png)
+![gobuster root](../Screenshots/Overflow%20The%20Jackpot%20CTF/02-gobuster-root.png)
 
 Ran wpscan to enumerate users and confirm the WP version was actually vulnerable.
 
