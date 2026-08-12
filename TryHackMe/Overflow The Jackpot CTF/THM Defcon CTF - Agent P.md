@@ -1,4 +1,4 @@
-# Overflow The Jackpot CTF - Agent P
+# Agent P
 
 Room link: https://tryhackme.com/room/thm-ctf-jackpot-overflow
 
