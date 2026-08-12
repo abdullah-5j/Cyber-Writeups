@@ -39,10 +39,10 @@ gobuster dir -u http://10.112.132.213/ -w /usr/share/wordlists/dirb/common.txt
 Ran wpscan to enumerate users and confirm the WP version was actually vulnerable.
 
 ```
-wpscan --url http://10.112.132.213 -e u,vp,vt
+python3 wp2shell.py read http://10.112.132.213 --preset users
 ```
 
-![wpscan users](../Screenshots/Overflow%20The%20Jackpot%20CTF/04-wpscan-users.png)
+![sqli extraction wp2shell](../Screenshots/Overflow%20The%20Jackpot%20CTF/3.png)
 
 Found the user `heinz`. WordPress 6.9 is vulnerable to a REST API batch-route confusion bug (CVE-2026-63030) that lets you SQLi your way into creating a pre-auth admin account.
 
