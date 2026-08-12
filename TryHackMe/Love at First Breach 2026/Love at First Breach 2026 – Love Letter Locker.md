@@ -2,7 +2,7 @@
 
 **Room:** [Love at First Breach 2026 – Love Letter Locker](https://tryhackme.com/room/lafb2026e2)
 
-An IDOR (Insecure Direct Object Reference) vulnerability that lets you read other users' private love letters just by changing a number in the URL.
+An IDOR vulnerability that lets you read other users' private love letters just by changing a number in the URL.
 
 ![Love Letter Locker](screenshots/01_room_banner.png)
 
@@ -21,7 +21,7 @@ nmap -sC -sV -p- -T4 10.112.137.43
 After doing the nmap scan I found 2 open ports which are:
 
 - **22/tcp** — SSH
-- **5000/tcp** — HTTP (Werkzeug httpd 3.1.5 / Python 3.12.3)
+- **5000/tcp** — HTTP 
 
 ---
 
