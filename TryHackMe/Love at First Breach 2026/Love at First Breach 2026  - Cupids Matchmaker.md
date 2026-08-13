@@ -14,7 +14,7 @@ Let's navigate to the URL and check what we get.
 
 ![Homepage](../Screenshots/Love%20at%20First%20Breach%202026/02_homepage.png)
 
-The site's pitch is "No Algorithms. No AI. Just Real Human Matchmakers" — so somewhere behind the scenes, an actual person (or at least an admin panel) is reading whatever gets submitted.
+The site's pitch is "No Algorithms. No AI. Just Real Human Matchmakers" so somewhere behind the scenes, an actual person (or at least an admin panel) is reading whatever gets submitted.
 
 There's a survey option, so let's go there.
 
