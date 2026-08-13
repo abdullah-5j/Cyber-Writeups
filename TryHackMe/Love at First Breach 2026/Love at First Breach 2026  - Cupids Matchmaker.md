@@ -4,7 +4,7 @@
 
 A stored XSS vulnerability in a "human-powered" matchmaking survey. The site claims a real person reads every submission — no AI, no algorithms — but that "human review" is exactly what makes it vulnerable: whatever you write in the form gets rendered somewhere on the backend, and if that render isn't sanitized, your script runs in someone else's browser.
 
-![Cupid's Matchmaker](../Screenshots/Love%20at%20First%20Breach%202026/room_banner.png)
+![Cupid's Matchmaker](../Screenshots/Love%20at%20First%20Breach%202026/Banner%Cupid's%Matchmaker.png)
 
 ---
 
