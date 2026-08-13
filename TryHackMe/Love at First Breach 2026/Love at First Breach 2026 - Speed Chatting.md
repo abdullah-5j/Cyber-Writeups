@@ -2,7 +2,7 @@
 
 **Room:** [Love at First Breach 2026 – Speed Chatting](https://tryhackme.com/room/lafb2026e4)
 
-An unrestricted file upload vulnerability that leads straight to a reverse shell. The app lets you upload a profile picture, but never actually checks what kind of file you're sending — so instead of a `.jpg`, we hand it a `.py` file and walk out with a shell on the box.
+An unrestricted file upload vulnerability that leads straight to a reverse shell. The app lets you upload a profile picture, but never actually checks what kind of file you're sending so instead of a `.jpg`, we hand it a `.py` file and walk out with a shell on the box.
 
 ![Speed Chatting](screenshots/01_room_banner.png)
 
