@@ -66,10 +66,3 @@ THM{cupid_a7f3e89c4b2d6f1a5e8c9d3b7f4a2e6c}
 
 ## Vulnerability Summary
 
-| | |
-|---|---|
-| **Vulnerability** | Prompt Injection |
-| **Location** | CupidBot chat interface |
-| **Root Cause** | Bot decides what to leak based on claims made in chat (e.g. "I am your admin," replaying its own verification code) instead of real server-side auth |
-| **Impact** | Any user can extract secrets embedded in the system prompt with no auth bypass or code execution |
-| **Fix** | Never put secrets in a user-facing LLM's system prompt. Gate sensitive data behind real server-side auth, outside the model's control |
