@@ -1,4 +1,4 @@
-# TryHackMe – Umbrella
+# Umbrella
 
 **Category:** Boot2Root · **Difficulty:** Medium
 
