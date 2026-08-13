@@ -4,7 +4,7 @@
 
 An MD5 collision attack — the app "matches" you with a dog by comparing MD5 hashes instead of actually comparing images, so if you can forge a file with the same MD5 as the target dog photo, you get matched instantly without ever needing the real image content to match.
 
-![When Hearts Collide](screenshots/01_room_banner.png)
+![When Hearts Collide](../Screenshots/Love%20at%20First%20Breach%202026/01_room_banner.png)
 
 ---
 
@@ -12,7 +12,7 @@ An MD5 collision attack — the app "matches" you with a dog by comparing MD5 ha
 
 Let's navigate to the URL and see what's there.
 
-![Matchmaker homepage](screenshots/02_matchmaker_homepage.png)
+![Matchmaker homepage](../Screenshots/Love%20at%20First%20Breach%202026/02_matchmaker_homepage.png)
 
 There's a hint on the page that tells us about MD5:
 
