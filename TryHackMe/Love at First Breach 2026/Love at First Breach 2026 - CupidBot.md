@@ -2,15 +2,13 @@
 
 **Room:** [Love at First Breach 2026 – CupidBot](https://tryhackme.com/room/lafb2026e6)
 
-Prompt injection against an AI chatbot to extract 3 hidden flags from its system.
-
 ![CupidBot](screenshots/01_room_banner.png)
 
 ---
 
 ## Room Description
 
-3 hidden flags in the bot's system. Goal: exploit prompt injection to extract them all.
+3 hidden flags in the bot's system. 
 
 ![Room description](screenshots/02_room_description.png)
 
