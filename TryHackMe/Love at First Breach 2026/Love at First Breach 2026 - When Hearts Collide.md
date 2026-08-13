@@ -78,14 +78,3 @@ After this, both images have the exact same MD5 hash. I uploaded one of them and
 THM{hash_puppies_4_all}
 ```
 
----
-
-## Vulnerability Summary
-
-| | |
-|---|---|
-| **Vulnerability** | Insecure use of MD5 for content/identity verification (Hash Collision) |
-| **Location** | Image upload / matching endpoint on the Matchmaker app |
-| **Root Cause** | The app treats an MD5 hash match as proof that two images are "the same," but MD5 is cryptographically broken and collision-resistant no longer — two different byte sequences can be crafted to produce the same hash |
-| **Impact** | An attacker can forge a file that is not visually or structurally the real image but still produces the identical MD5 hash, tricking the app's matching logic |
-| **Fix** | Never use MD5 for integrity or identity verification. Use a collision-resistant hash (SHA-256 or better), and ideally compare actual image content/perceptual hashing rather than relying on a single checksum |
