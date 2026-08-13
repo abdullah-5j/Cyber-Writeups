@@ -4,7 +4,7 @@
 
 TryHeartMe is a Valentine's gift shop where every logged-in user carries a JWT that quietly tells the server who they are, how many credits they have, and critically what role they hold. The problem is that none of that information is actually protected. The token can be decoded, edited, and handed back to the server as if nothing happened, which turns a regular guest account into a staff account with a few clicks on [jwt.io](https://jwt.io).
 
-![TryHeartMe](screenshots/01_room_banner.png)
+![TryHeartMe](../Screenshots/Love%20at%20First%20Breach%202026/banner_tryheartme.png)
 
 ---
 
@@ -12,15 +12,15 @@ TryHeartMe is a Valentine's gift shop where every logged-in user carries a JWT t
 
 First, we create an account so we can actually interact with the shop instead of browsing as a guest.
 
-![Creating an account](screenshots/02_create_account.png)
+![Creating an account](../Screenshots/Love%20at%20First%20Breach%202026/02_create_account.png)
 
 The shop itself is a simple Valentine's storefront roses, chocolates, strawberries, a love letter card each purchasable with in-app credits. Online top-ups are disabled, so credits aren't something you're meant to just buy your way into.
 
-![TryHeartMe Valentines Shop](screenshots/03_tryheartme_shop.png)
+![TryHeartMe Valentines Shop](../Screenshots/Love%20at%20First%20Breach%202026/03_tryheartme_shop.png)
 
 Once logged in and viewing a product page, the app conveniently displays our current session state right in the corner: `Credits: 0` and `Role: user`. As a fresh account, we have no credits and no elevated access.
 
-![Logged in as a regular user with 0 credits](screenshots/04_role_user_no_admin_access.png)
+![Logged in as a regular user with 0 credits](../Screenshots/Love%20at%20First%20Breach%202026/04_role_user_no_admin_access.png)
 
 ---
 
@@ -38,7 +38,7 @@ Since the app is clearly tracking role and credit state somewhere client-side, t
 }
 ```
 
-![Decoding the JWT on jwt.io](screenshots/05_jwt_decoded_role_field.png)
+![Decoding the JWT on jwt.io](../Screenshots/Love%20at%20First%20Breach%202026/05_jwt_decoded_role_field.png)
 
 There it is — `"role": "user"` sitting right there in cleartext, along with our credit balance. A JWT is only as trustworthy as its signature; if the server doesn't properly re-verify that signature, then editing this payload and handing it back is just as good as being an actual admin. So we edit the `role` field from `"user"` to `"admin"`, let jwt.io re-sign the token, and swap it into our session cookie in place of the original.
 
