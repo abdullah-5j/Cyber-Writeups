@@ -4,7 +4,7 @@
 
 An IDOR vulnerability that lets you read other users' private love letters just by changing a number in the URL.
 
-![Love Letter Locker](../Screenshots/Love%20at%20First%20Breach%202026/01_room_banner.png)
+![Love Letter Locker banner](../Screenshots/Love%20at%20First%20Breach%202026/Banner%20Love%20letter%20locker.png)
 
 ---
 
