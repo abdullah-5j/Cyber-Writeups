@@ -34,7 +34,7 @@ Interesting — we find an admin page. Let's go there and check it out.
 
 ![Admin login page](../Screenshots/Love%20at%20First%20Breach%202026/05_admin_login_page.png)
 
-I tried a bunch of tricks and payloads on the login form, but nothing worked there. So I went back to the survey form instead — since it said the submission goes to the developers/team for review, maybe there's something to get from that side of things.
+I tried a bunch of tricks and payloads on the login form, but nothing worked there. So I went back to the survey form instead since it said the submission goes to the developers/team for review, maybe there's something to get from that side of things.
 
 I tried an XSS payload in the survey and it gave me a green success signal.
 
@@ -60,7 +60,7 @@ On the other end, I set up a listener on port 5000:
 python3 -m http.server 5000
 ```
 
-Once the admin/reviewer opened the submission, the payload fired and the cookie came in as a URL-encoded GET request — since the payload uses `encodeURIComponent`.
+Once the admin/reviewer opened the submission, the payload fired and the cookie came in as a URL-encoded GET request since the payload uses `encodeURIComponent`.
 
 ![Listener catching the cookie](../Screenshots/Love%20at%20First%20Breach%202026/08_listener_captures_cookie.png)
 
