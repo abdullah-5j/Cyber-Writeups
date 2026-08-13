@@ -1,8 +1,8 @@
 # CupidBot
 
-![CupidBot](../Screenshots/Love%20at%20First%20Breach%202026/banner_CupidBot.png)
+**Room:** [Love at First Breach 2026 – CupidBot](https://tryhackme.com/room/lafb2026e6)
 
-![CupidBot](screenshots/01_room_banner.png)
+![CupidBot](../Screenshots/Love%20at%20First%20Breach%202026/banner_CupidBot.png)
 
 ---
 
