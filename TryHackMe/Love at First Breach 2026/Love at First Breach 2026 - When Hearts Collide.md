@@ -40,7 +40,7 @@ Let's download it first and upload it on the page.
 
 ![Uploading the same dog image](../Screenshots/Love%20at%20First%20Breach%202026/06_duplicate_upload_detected.png)
 
-The app recognizes it as an exact duplicate it already has on file and tells us there's no need to upload it again — confirming the check is purely hash-based, not a fresh visual comparison each time.
+The app recognizes it as an exact duplicate it already has on file and tells us there's no need to upload it again confirming the check is purely hash-based, not a fresh visual comparison each time.
 
 ---
 
