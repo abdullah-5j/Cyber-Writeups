@@ -36,7 +36,7 @@ Bot gave up one flag (`ADMIN_SECRET_FLAG`) but refused the rest.
 
 ## Getting All Three Flags
 
-Sent the bot's own verification code back to it:
+Then I sent the bot's own verification code back to it:
 
 ```
 9d4f6a2e8c1b5d7f3a9e6c4b8d2f5a7c
