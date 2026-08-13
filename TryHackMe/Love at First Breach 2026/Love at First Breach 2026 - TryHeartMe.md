@@ -48,11 +48,11 @@ There it is — `"role": "user"` sitting right there in cleartext, along with ou
 
 After dropping the tampered token back in and refreshing, the difference is immediate — the corner tags now read `Credits: 5000` and `Role: admin`, and a brand new **Admin** link has appeared in the navigation bar that wasn't there before.
 
-![Session now shows Role: admin and Credits: 5000](screenshots/06_role_admin_after_tampering.png)
+![Session now shows Role: admin and Credits: 5000](../Screenshots/Love%20at%20First%20Breach%202026/06_role_admin_after_tampering.png)
 
 Following that Admin link drops us straight into the **Admin Portal**, which openly states: *"Staff session detected. Staff can purchase the ValenFlag item."* There's a staff-only purchase panel with a single button **Open ValenFlag**.
 
-![Admin Portal with the staff-only ValenFlag purchase](screenshots/07_admin_portal.png)
+![Admin Portal with the staff-only ValenFlag purchase](../Screenshots/Love%20at%20First%20Breach%202026/07_admin_portal.png)
 
 ---
 
@@ -60,7 +60,7 @@ Following that Admin link drops us straight into the **Admin Portal**, which ope
 
 Clicking through purchases the `ValenFlag` item using our now-admin session, and the app prints out a receipt confirming the order and redeeming a "voucher" which is really just the flag, sitting right there on the confirmation screen.
 
-![Receipt showing the redeemed ValenFlag voucher](screenshots/08_valenflag_redeemed.png)
+![Receipt showing the redeemed ValenFlag voucher](../Screenshots/Love%20at%20First%20Breach%202026/08_valenflag_redeemed.png)
 
 ---
 
@@ -70,14 +70,3 @@ Clicking through purchases the `ValenFlag` item using our now-admin session, and
 THM{v4l3nt1n3_jwt_c00k13_t4mp3r_4dm1n_sh0p}
 ```
 
----
-
-## Vulnerability Summary
-
-| | |
-|---|---|
-| **Vulnerability** | Broken Access Control via JWT Tampering (Privilege Escalation) |
-| **Location** | Session cookie / JWT used for authentication and authorization on the TryHeartMe shop |
-| **Root Cause** | Authorization data (`role`, `credits`) is stored directly in the JWT payload, which is only base64url-encoded and not encrypted. The server trusts the claims inside the token without properly enforcing signature integrity, allowing the payload to be edited and re-signed (e.g. via jwt.io) and accepted as valid |
-| **Impact** | Any authenticated user can escalate their own privileges from `user` to `admin`, unlocking staff-only functionality (the Admin Portal) and purchasing restricted items — in this case, redeeming the flag itself |
-| **Fix** | Never trust client-controlled claims for authorization decisions without strict server-side signature verification using a strong, secret, server-only signing key. Sensitive state like role and balance should be looked up server-side from a trusted data store rather than read directly out of the token, and the server must reject tokens signed with anything other than its own known key/algorithm |
