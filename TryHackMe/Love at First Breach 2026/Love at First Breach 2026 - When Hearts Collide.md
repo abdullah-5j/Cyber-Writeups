@@ -18,7 +18,7 @@ There's a hint on the page that tells us about MD5:
 
 > "Matchmaker keeps up with the universe by comparing your photo's MD5 hash to every doggo snapshot that wanders through the site. If your hash is identical to a pup's, that's our cue: the algorithm wags its glittering tail and declares you a match."
 
-So the matching isn't based on the actual image content at all — it's purely comparing **MD5 hashes**. That's the vulnerability right there.
+So the matching isn't based on the actual image content at all it's purely comparing **MD5 hashes**. That's the vulnerability right there.
 
 ![MD5 hint on the page](../Screenshots/Love%20at%20First%20Breach%202026/03_md5_hint.png)
 
