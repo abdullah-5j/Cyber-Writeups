@@ -46,7 +46,7 @@ There it is — `"role": "user"` sitting right there in cleartext, along with ou
 
 ## Escalating Privileges
 
-After dropping the tampered token back in and refreshing, the difference is immediate — the corner tags now read `Credits: 5000` and `Role: admin`, and a brand new **Admin** link has appeared in the navigation bar that wasn't there before.
+After dropping the tampered token back in and refreshing, the difference is immediate the corner tags now read `Credits: 5000` and `Role: admin`, and a brand new **Admin** link has appeared in the navigation bar that wasn't there before.
 
 ![Session now shows Role: admin and Credits: 5000](../Screenshots/Love%20at%20First%20Breach%202026/06_role_admin_after_tampering.png)
 
