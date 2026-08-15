@@ -30,7 +30,7 @@ gobuster dir -u http://10.112.129.122:5000 -w /usr/share/wordlists/dirbuster/dir
 
 ![Gobuster scan](../Screenshots/Love%20at%20First%20Breach%202026/04_gobuster_scan.png)
 
-Interesting — we find an admin page. Let's go there and check it out.
+Interesting we find an admin page. Let's go there and check it out.
 
 ![Admin login page](../Screenshots/Love%20at%20First%20Breach%202026/05_admin_login_page.png)
 
