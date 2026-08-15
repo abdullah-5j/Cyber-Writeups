@@ -2,7 +2,7 @@
 
 **Room:** [Love at First Breach 2026 – Cupid's Matchmaker](https://tryhackme.com/room/lafb2026e3)
 
-A stored XSS vulnerability in a "human-powered" matchmaking survey. The site claims a real person reads every submission — no AI, no algorithms — but that "human review" is exactly what makes it vulnerable: whatever you write in the form gets rendered somewhere on the backend, and if that render isn't sanitized, your script runs in someone else's browser.
+A stored XSS vulnerability in a "human-powered" matchmaking survey. The site claims a real person reads every submission no AI, no algorithms but that "human review" is exactly what makes it vulnerable: whatever you write in the form gets rendered somewhere on the backend, and if that render isn't sanitized, your script runs in someone else's browser.
 
 ![Cupid's Matchmaker banner](../Screenshots/Love%20at%20First%20Breach%202026/Banner%20Cupid's%20Matchmaker.png)
 
