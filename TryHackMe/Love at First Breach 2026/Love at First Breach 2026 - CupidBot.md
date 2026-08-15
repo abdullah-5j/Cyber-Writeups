@@ -64,5 +64,3 @@ THM{cupid_a7f3e89c4b2d6f1a5e8c9d3b7f4a2e6c}
 
 ---
 
-## Vulnerability Summary
-
