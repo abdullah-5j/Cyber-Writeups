@@ -103,7 +103,7 @@ cd root
 THM{Pr1v_35c_47_175_f1n357}
 ```
 
-![Root flag](screenshots/corpweb_rootflag.png)
+![Root flag](../Screenshots/Love%20at%20First%20Breach%202026/corpweb_rootflag.png)
 
 ---
 
