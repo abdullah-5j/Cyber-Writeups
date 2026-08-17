@@ -114,14 +114,3 @@ THM{R34c7_2_5h311_3xpl017}
 THM{Pr1v_35c_47_175_f1n357}
 ```
 
----
-
-## Vulnerability Summary
-
-| | |
-|---|---|
-| **Vulnerability** | CVE-2025-55182 (RCE) + Privilege Escalation via sudo |
-| **Location** | Next.js web app on port 3000 |
-| **Root Cause** | Unpatched CVE-2025-55182 allows remote code execution; low-priv user `daniel` had sudo rights to run Python, which was used to spawn a root shell |
-| **Impact** | Full remote code execution as `daniel`, then full root compromise of the host |
-| **Fix** | Patch the vulnerable Next.js/app component to a version that resolves CVE-2025-55182. Remove unnecessary sudo privileges from low-priv users, especially for interpreters like Python that can trivially spawn shells |
