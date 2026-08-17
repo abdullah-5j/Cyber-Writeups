@@ -6,7 +6,7 @@ Retracing an attacker's steps on "Romance & Co." — a compromised web app. Expl
 
 Target: `http://10.112.159.64:3000`
 
-![Corp Website](screenshots/corpweb_banner.png)
+![Corp Website](../Screenshots/Love%20at%20First%20Breach%202026/corpweb_banner.png)
 
 ---
 
@@ -14,7 +14,7 @@ Target: `http://10.112.159.64:3000`
 
 200 pts, Web, Medium. Scenario: "Romance & Co." was breached, logs are incomplete, need to retrace the attack.
 
-![Room description](screenshots/corpweb_roomdescription.png)
+![Room description](../Screenshots/Love%20at%20First%20Breach%202026/corpweb_roomdescription.png)
 
 ---
 
