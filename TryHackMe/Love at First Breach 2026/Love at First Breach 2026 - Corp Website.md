@@ -2,7 +2,7 @@
 
 **Room:** [Love at First Breach 2026 – Corp Website](https://tryhackme.com/room/lafb2026e7)
 
-Retracing an attacker's steps on "Romance & Co." — a compromised web app. Exploit CVE-2025-55182 for RCE, land as a low-priv user, then escalate to root.
+Retracing an attacker's steps on "Romance & Co." a compromised web app. Exploit CVE-2025-55182 for RCE, land as a low-priv user, then escalate to root.
 
 Target: `http://10.112.159.64:3000`
 
@@ -12,7 +12,7 @@ Target: `http://10.112.159.64:3000`
 
 ## Room Description
 
-200 pts, Web, Medium. Scenario: "Romance & Co." was breached, logs are incomplete, need to retrace the attack.
+Scenario: "Romance & Co." was breached, logs are incomplete, need to retrace the attack.
 
 ![Room description](../Screenshots/Love%20at%20First%20Breach%202026/corpweb_roomdescription.png)
 
@@ -40,7 +40,7 @@ Found 2 open ports:
 
 ## Vulnerability Discovery
 
-Ran gobuster — nothing useful. Ran nuclei against the app — nothing on gobuster, but nuclei flagged a critical CVE:
+Ran gobuster nothing useful. Ran nuclei against the app nothing on gobuster, but nuclei flagged a critical CVE:
 
 ```
 [CVE-2025-55182] [http] [critical] http://10.114.187.208:3000
