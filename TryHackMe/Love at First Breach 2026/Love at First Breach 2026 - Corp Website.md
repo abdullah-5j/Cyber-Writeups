@@ -22,7 +22,7 @@ Target: `http://10.112.159.64:3000`
 
 Navigated to the site. Just a normal romantic-experiences booking company page, nothing notable on the surface.
 
-![Romance & Co. website](screenshots/corpweb_website.png)
+![Romance & Co. website](../Screenshots/Love%20at%20First%20Breach%202026/corpweb_website.png)
 
 Ran nmap:
 
@@ -34,7 +34,7 @@ Found 2 open ports:
 - **22/tcp** — SSH (OpenSSH 8.9p1 Ubuntu)
 - **3000/tcp** — Next.js app
 
-![Nmap scan](screenshots/corpweb_nmap.png)
+![Nmap scan](../Screenshots/Love%20at%20First%20Breach%202026/corpweb_nmap.png)
 
 ---
 
