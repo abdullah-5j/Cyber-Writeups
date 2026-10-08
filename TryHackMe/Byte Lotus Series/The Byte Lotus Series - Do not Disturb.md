@@ -16,7 +16,7 @@ nmap -sC -sV -p- -T4 10.112.190.152
 
 ![nmap](../Screenshots/drift/nmap.png)
 
-Two doors: OpenSSH 9.6p1 on 22, and HTTP on 80 that fingerprints as *Node.js (Express middleware)*, title "Byte Lotus — Poolside". No juicy version banner to lean on, so the app itself is the way in.
+Two doors: OpenSSH 9.6p1 on 22, and HTTP on 80 that fingerprints as *Node.js (Express middleware)*, title "Byte Lotus Poolside". No juicy version banner to lean on, so the app itself is the way in.
 
 The landing page is a booking front-end with a Staff / Guest ID + passphrase login.
 
@@ -32,7 +32,7 @@ gobuster dir -u http://10.112.190.152 -w /usr/share/wordlists/dirbuster/director
 
 ![gobuster](../Screenshots/drift/gobuster.png)
 
-`/staff` (403) and `/logout` (302) are the interesting hits. `/staff` is gated — I need a staff session before that 403 becomes a page.
+`/staff` (403) and `/logout` (302) are the interesting hits. `/staff` is gated I need a staff session before that 403 becomes a page.
 
 ## Initial access — NoSQL auth bypass
 
@@ -52,7 +52,7 @@ The response is the tell: `302 Found`, `Location: /staff`, and a fresh `Set-Cook
 
 The wallet just signed a transaction it should never have authorized.
 
-## Staff console — Cabana Desk
+## Staff console Cabana Desk
 
 Loading `/staff` with that `connect.sid` drops me into the "Cabana Desk" staff console, signed in as `attendant`.
 
@@ -62,13 +62,13 @@ The gift is right there in the field label: a *"Confirmation template (EJS — u
 
 ## SSTI
 
-Cheapest possible probe — an arithmetic expression.
+Cheapest possible probe an arithmetic expression.
 
 Template `<%= 7*7 %>` → Preview `49`.
 
 ![ssti 7*7 renders 49](../Screenshots/drift/ssti-49.png)
 
-`49`, not the literal string — confirmed EJS SSTI. And since EJS runs raw JS inside scriptlets, this is a straight line to code execution.
+`49`, not the literal string confirmed EJS SSTI. And since EJS runs raw JS inside scriptlets, this is a straight line to code execution.
 
 ## RCE — reverse shell as poolside
 
@@ -124,7 +124,7 @@ The briefing said to follow the previous climber's footprints, and someone did l
 cat /home/poolside/.viminfo
 ```
 
-The `.viminfo` points at `/tmp/solve.js`, but the file itself is gone (cleared on reboot) — the leftover reference is the footprint: someone edited an exploit script here and climbed this exact route before me.
+The `.viminfo` points at `/tmp/solve.js`, but the file itself is gone (cleared on reboot) the leftover reference is the footprint: someone edited an exploit script here and climbed this exact route before me.
 
 The actual lever is a service. Digging through `/opt` turns up a telemetry app owned by a different user.
 
@@ -168,7 +168,7 @@ cat /tmp/pipe.txt
 
 ## disk group → root
 
-`disk` group membership is read/write on the raw block devices, which is effectively root regardless of file permissions — I can read root's files straight off the underlying filesystem. 
+`disk` group membership is read/write on the raw block devices, which is effectively root regardless of file permissions I can read root's files straight off the underlying filesystem. 
 
 
 ```
