@@ -9,7 +9,7 @@ The report was about POWDER WOLF activity against Cascadia Ski and Resort Collec
 
 ---
 
-## PR #1 — External RDP From Untrusted Source
+## PR #1 External RDP From Untrusted Source
 
 The first rule was meant to detect external RDP logons. The broken rule was filtering out `203.0.113.*`, but that was actually the attacker range from the report, not a trusted range.
 
@@ -33,7 +33,7 @@ THM{Untru5ted_R4nge_Bu5ted}
 
 ---
 
-## PR #2 — NetScan `delete.me` Share Test
+## PR #2 NetScan `delete.me` Share Test
 
 This one was for SoftPerfect NetScan testing writable admin shares. The original rule looked for `delete.me` in `ShareName`, but the report showed it was actually in `RelativeTargetName`.
 
@@ -55,7 +55,7 @@ THM{D3l3t3_M3_G1v3s_1t_4w4y}
 
 ---
 
-## PR #3 — Remote Access Tool Service Persistence
+## PR #3 Remote Access Tool Service Persistence
 
 The report showed AnyDesk installed as a Windows service on a domain controller. The broken rule was looking at `Image`, but service installation logs use fields like `ServiceName` and `ServiceFileName`.
 
@@ -71,7 +71,7 @@ THM{BaniKed_4ccess_Ch4nnel}
 
 ---
 
-## PR #4 — Archive From Live Network Share
+## PR #4 Archive From Live Network Share
 
 The report showed 7-Zip being used to archive data directly from a live share like:
 
@@ -93,7 +93,7 @@ THM{Z1pp3d_Right_0ut_th3_D00r}
 
 ---
 
-## PR #5 — Lynx Ransomware Deployment Staging
+## PR #5  Lynx Ransomware Deployment Staging
 
 The last rule was for Lynx ransomware staging. The broken rule was looking for `services.exe` as the parent and `w\.exe` in the command line, but the report showed the payload was run from `cmd.exe` with flags like:
 
